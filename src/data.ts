@@ -4,7 +4,7 @@ export const personalInfo = {
   partOfSpeech: "noun",
   bio: [
     {
-      text: "a full-stack developer and ",
+      text: "A full-stack developer and ",
       links: [
         {
           label: "product builder",
@@ -12,7 +12,7 @@ export const personalInfo = {
         },
       ],
       suffix:
-        " with deep experience across engineering, product strategy, and user-centric design.",
+        " with keen curiosity across engineering, product strategy, and user-centric design.",
     },
     {
       text: "a ",
@@ -28,82 +28,8 @@ export const personalInfo = {
   ],
 };
 
-export interface ExperienceEntry {
-  company: string;
-  companyUrl?: string;
-  badge?: string;
-  role: string;
-  location: string;
-  period: string;
-  summary: string;
-  details: string[];
-}
-
-export const experiences: ExperienceEntry[] = [
-  {
-    company: "Resonate",
-    badge: "YC W24",
-    companyUrl: "https://www.ycombinator.com/companies/resonate",
-    role: "Software Engineer",
-    location: "San Francisco, CA",
-    period: "2024 - Present",
-    summary:
-      "As an early software engineer bridging product strategy and technical execution, driving the development of an AI-native messaging platform from zero to one.",
-    details: [
-      "Architecting and building core product features for an AI-focused messaging ecosystem.",
-      "Developing real-time systems and innovating ways to transform and present information dynamically within messaging interfaces.",
-      "Collaborating within a lean team to build robust tools for AI-driven communication.",
-      "Operating top-to-bottom, from product conception to complete software development.",
-    ],
-  },
-  {
-    company: "Entrepreneur First",
-    companyUrl: "https://www.joinef.com/",
-    role: "Founder in Residence",
-    location: "London, UK",
-    period: "2024",
-    summary:
-      "As a Founder in Residence at EF, a premier global talent investor and startup accelerator, immersed in designing and developing cutting-edge Agentic AI systems.",
-    details: [
-      "Built autonomous, goal-driven AI agents that shifted from suggestion-based tools to proactive execution.",
-      "Drove a bold vision for the future of computing: making traditional web browsing obsolete.",
-      "Operated in a high-intensity environment surrounded by world-class cofounders and mentors.",
-      "Positioned at the forefront of a paradigm shift in AI, tackling hard technical and conceptual challenges.",
-    ],
-  },
-  {
-    company: "Google Summer of Code",
-    companyUrl: "https://summerofcode.withgoogle.com/",
-    role: "Open Source Contributor",
-    location: "Remote",
-    period: "2023",
-    summary:
-      "Designed and developed a comprehensive system for managing ACL permissions across multiple Linux file system servers.",
-    details: [
-      "Built a robust backend capable of processing millions of permission change requests.",
-      "Implemented two Linux systemd daemons communicating via Unix sockets.",
-      "Created a user-friendly Next.js frontend enabling secure login and backend communication.",
-    ],
-  },
-  {
-    company: "Freelance",
-    companyUrl: "https://www.upwork.com/",
-    role: "Full-Stack Developer & Technical Writer",
-    location: "Remote",
-    period: "2022 - 2024",
-    summary:
-      "Authored comprehensive technical documentation for SCA tools and developed custom scraping solutions for real estate platforms.",
-    details: [
-      "Authored comprehensive, highly technical documentation (50+ pages) for a Software Composition Analysis (SCA) tool.",
-      "Ghostwrote in-depth content on Reachability Analysis for a security company CTO.",
-      "Deployed and configured Flipt on cloud infrastructure to support video production workflows.",
-      "Developed custom scraping tools targeting real estate platforms for efficient data extraction.",
-    ],
-  },
-];
-
 export const inBetweenExperiences = {
-  title: "In Between These Experiences",
+  title: "In Between These Learnings",
   subtitle: "The Product Building Journey",
   content: `I've been building and experimenting on the product side for a long time. Each previous product always feels naive in hindsight, but looking back, I can see they were incrementally better, each iteration teaching me something new about users, infrastructure, and what it takes to build something people actually want.
 
@@ -148,29 +74,6 @@ export const techStack = {
   ],
 };
 
-export interface Publication {
-  title: string;
-  conference: string;
-  year: number;
-  authors: string;
-  doi: string;
-  abstract: string;
-}
-
-export const publications: Publication[] = [
-  {
-    title:
-      "An Adapter Device for Enhancing the Security of the Modbus Protocol in Legacy Systems",
-    conference:
-      "2025 17th International Conference on COMmunication Systems and NETworks (COMSNETS)",
-    year: 2025,
-    authors: "Divyam Jha; T. S. Sreeram",
-    doi: "https://doi.org/10.1109/COMSNETS63942.2025.10885597",
-    abstract:
-      "Supervisory Control and Data Acquisition systems are the backbone of managing critical infrastructure in modern industrial control systems, spanning sectors from power generation to logistics. This paper proposes an adapter device for enhancing the security of the Modbus protocol without replacing devices in legacy systems.",
-  },
-];
-
 export const explainerVideos = {
   channelUrl: "https://www.youtube.com/@theracecondition",
   videos: [
@@ -183,7 +86,7 @@ export const explainerVideos = {
 
 export const writings = {
   platform: "Medium",
-  url: "https://medium.com/@divyamjha",
+  url: "https://medium.com/@divyamjha.70055594",
   description:
     "i host my thoughts on medium rather than building a custom site. instead of overengineering and reinventing the wheel, i prefer leveraging a mature platform that lets me focus on what matters: sharing insights on ai systems, product strategy, and technical architecture.",
 };
@@ -206,6 +109,27 @@ export const aboutMe = {
     "And beside all this i love to read or understand how tech startups operate and grow."
   ],
 };
+
+export const projects = [
+  {
+    title: "AskMyNotes",
+    description: "An intuitive web application for organizing, storing, and asking questions against your personal notes using AI.",
+    url: "https://ask-my-notes-kryptonian-coders.vercel.app/",
+    tech: ["React", "TypeScript", "Vite" ,"Gemini API"]
+  },
+  {
+    title: "Blogify",
+    description: "A full-stack blogging platform with comprehensive user authentication, allowing users to create, read, and manage articles.",
+    url: "https://blogging-application-eight.vercel.app/",
+    tech: ["Express","Node.js", "MongoDB" ,"ejs"]
+  },
+  {
+    title: "Brain Expo",
+    description: "An interactive online platform and exhibition space designed to showcase innovative ideas and connect creators.",
+    url: "https://www.brainexpo.me/",
+    tech: ["TypeScript ","React", "Tailwind CSS", "Vite"]
+  }
+];
 
 export const socials = {
   github: "https://github.com/divyam-jha123",
