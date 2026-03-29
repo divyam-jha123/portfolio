@@ -414,15 +414,114 @@ img {
   line-height: 1.7;
 }
 
-.tech-stack-grid {
+/* Marquee wrapper */
+.marquee-wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding: 16px 0;
+}
+
+.marquee-fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.marquee-fade-left {
+  left: 0;
+  background: linear-gradient(to right, var(--bg-primary), transparent);
+}
+
+.marquee-fade-right {
+  right: 0;
+  background: linear-gradient(to left, var(--bg-primary), transparent);
+}
+
+.marquee-track {
+  display: flex;
+  gap: 40px;
+  width: max-content;
+  animation: marquee-scroll 35s linear infinite;
+}
+/* 
+.marquee-wrapper:hover .marquee-track {
+  animation-play-state: paused;
+} */
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  cursor: default;
+  transition: transform 0.25s ease;
+}
+
+.marquee-item:hover {
+  transform: scale(1.15);
+}
+
+.marquee-icon {
+  font-size: 28px;
+  color: var(--text-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.25s ease, filter 0.25s ease;
+}
+
+.marquee-item:hover .marquee-icon {
+  color: var(--text-primary);
+  filter: drop-shadow(0 0 8px var(--accent));
+}
+
+.marquee-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+  transition: color 0.25s ease;
+}
+
+.marquee-item:hover .marquee-label {
+  color: var(--text-secondary);
+}
+
+/* Expandable tech grid */
+.tech-expand-grid {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, margin-top 0.5s ease, opacity 0.4s ease;
+  opacity: 0;
+  margin-top: 0;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 24px;
 }
 
+.tech-expand-grid.active {
+  max-height: 500px;
+  opacity: 1;
+  margin-top: 24px;
+}
+
 .tech-category h4 {
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-tertiary);
@@ -437,8 +536,18 @@ img {
 .tech-category li {
   font-size: 14px;
   color: var(--text-primary);
-  padding: 4px 0;
+  padding: 6px 0;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tech-list-icon {
+  font-size: 16px;
+  color: var(--text-tertiary);
+  display: flex;
+  align-items: center;
 }
 
 /* Recommendations */

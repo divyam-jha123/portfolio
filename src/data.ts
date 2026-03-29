@@ -31,24 +31,30 @@ export const personalInfo = {
 export const inBetweenExperiences = {
   title: "In Between These Learnings",
   subtitle: "The Product Building Journey",
-  content: `I've been building and experimenting on the product side for a long time. Each previous product always feels naive in hindsight, but looking back, I can see they were incrementally better, each iteration teaching me something new about users, infrastructure, and what it takes to build something people actually want.
+  content: `I've been building and experimenting on the product side for a long time. Each previous product always feels naive in hindsight, but looking back, I can see they were incrementally better, each iteration teaching me something new about users, infrastructure, and what it takes to build something people actually want.\n\n
+  It started with participating in various hackathons, there i find my love for building products and solving real world problems. 
+  so I build BrainExpo, a platform to store and share various kinds of links like youtube, linkedin, github, twitter, any document, etc. \n\n
+  I saw a problem that we never look back to our bookmarks, we eventually forgot that we have saved something which is important to look. 
+  because bookmarks are not designed for thinking or learning — they’re just storage.\n\n
+  But Brainexpo keeps the user updated with weekly insights of their saved links.\n\n
+  But what next for brainexpo?\n
+  pivot - \n\n
+  one day someone asked me that why will anyone pay for this because they already have free options available with ease.\n\n
+  Then i re-thought on this and i got to remember a thing from my childhood that how i used to spend hours finding that one photo of me and my brother from a gallary of 1000 photos.\n\n
+  And after so many years the exact problem still exists…\n\n
+   And the main problem is not with individuals, its for the agencies who have lakhs of videos ,frames, pictures, etc.\n\n
+Finding that one frame inside the lakhs of videos and millions of frames are headache.\n\n
+Hence, I desided to re-built Brainexpo ,a search engine for photes, videos, files, documents, anything and everything.\n\n
+And the journey of building will never stop.
 
-It started with **MetaWiper** during my sophomore year, a tool that cleaned image metadata. No one would use it, but I was proud. It was my first real attempt at shipping something complete.
+`
 
-Next came **Stockic**, a news app where I spent months doing serious infrastructure work. This was where I learned to build systems that could scale, not just features that looked good.
-
-Then I worked on **Gloss Card**, and for the first time, a customer actually wanted to buy it for their product. That validation, knowing someone saw enough value to pay, was a turning point.
-
-After that, I built **NeuraLeap**, where I had the most meaningful user interactions yet. I worked on data pipelines capable of handling 50 million LinkedIn profiles and processing them with AI. The scale was different, the stakes were higher, and the technical challenges forced me to level up.
-
-Most recently, I worked on **Meteor**, an AI SEO toolkit at Entrepreneurs First. This time, my product was being used by 6 YC-backed companies. Real users. Real traction. Real feedback loops.
-
-So yes, hard work and consistency pay off. Each product was a step forward, even when it didn't feel like it at the time.`,
 };
 
 export const education = {
   institution: "vedam school of techonolgy",
   year: "2025 - Surviving",
+  degree: "Computer Science Engineering"
 };
 
 export const techStack = {
@@ -70,16 +76,6 @@ export const techStack = {
     {
       name: "Infrastructure",
       items: ["Docker", "AWS", "MongoDB","PostgreSQL", "Redis" ],
-    },
-  ],
-};
-
-export const explainerVideos = {
-  channelUrl: "https://www.youtube.com/@theracecondition",
-  videos: [
-    {
-      title: "Spotify System Design",
-      url: "https://www.youtube.com/watch?v=m84tBP_4DWE",
     },
   ],
 };

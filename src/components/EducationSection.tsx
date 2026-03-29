@@ -13,7 +13,14 @@ export function EducationSection() {
     >
         <div className="section-label">Education</div>
         <div className="education-entry">
-          <div className='education-institution'>{education.institution}</div>
+          <div style={{display: 'flex', justifyContent: 'space-between'}}>
+            <span className='education-institution'>
+              {education.institution}
+            </span>
+            <span className='education-year'>
+              {education.degree}
+            </span>
+            </div>
           <span className="education-year">{education.year}</span>
         </div>
     </motion.section>
