@@ -67,7 +67,7 @@ export const techStack = {
     },
     {
       name: "Frontend",
-      items: ["React", "Next.js", "bootstrap", "Tailwind CSS"],
+      items: ["React", "bootstrap", "Tailwind CSS"],
     },
     {
       name: "Backend",
@@ -75,7 +75,7 @@ export const techStack = {
     },
     {
       name: "Infrastructure",
-      items: ["Docker", "AWS", "MongoDB","PostgreSQL", "Redis" ],
+      items: ["Docker", "AWS", "MongoDB","PostgreSQL"],
     },
   ],
 };
