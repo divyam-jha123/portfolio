@@ -5,13 +5,29 @@ import { useState, useEffect, useRef } from 'react';
 import { socials } from '../data';
 
 
+import QRCode from 'qrcode';
+
 export function Dock() {
   const [showQR, setShowQR] = useState(false);
   const qrCanvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     if (showQR && qrCanvasRef.current) {
-      drawQRCode(qrCanvasRef.current, window.location.href);
+      QRCode.toCanvas(
+        qrCanvasRef.current,
+        'https://divyamjha.vercel.app/',
+        {
+          width: 200,
+          margin: 1,
+          color: {
+            dark: '#000000',
+            light: '#ffffff'
+          }
+        },
+        (error: Error | null | undefined) => {
+          if (error) console.error(error);
+        }
+      );
     }
   }, [showQR]);
 
@@ -102,56 +118,3 @@ export function Dock() {
   );
 }
 
-// Simple QR code drawer (draws a stylized QR-like pattern based on URL)
-function drawQRCode(canvas: HTMLCanvasElement, url: string) {
-  const ctx = canvas.getContext('2d');
-  if (!ctx) return;
-
-  const size = 200;
-  const moduleCount = 25;
-  const moduleSize = size / moduleCount;
-
-  ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--bg-primary').trim() || '#fff';
-  ctx.fillRect(0, 0, size, size);
-
-  const fg = getComputedStyle(document.documentElement).getPropertyValue('--text-primary').trim() || '#000';
-  ctx.fillStyle = fg;
-
-  // Generate a deterministic pattern from the URL
-  const hash = (s: string, i: number) => {
-    let h = 0;
-    for (let j = 0; j < s.length; j++) {
-      h = ((h << 5) - h + s.charCodeAt(j) + i * 31) | 0;
-    }
-    return h;
-  };
-
-  // Draw finder patterns (the 3 big squares in corners)
-  const drawFinder = (x: number, y: number) => {
-    for (let i = 0; i < 7; i++) {
-      for (let j = 0; j < 7; j++) {
-        if (
-          i === 0 || i === 6 || j === 0 || j === 6 ||
-          (i >= 2 && i <= 4 && j >= 2 && j <= 4)
-        ) {
-          ctx.fillRect((x + i) * moduleSize, (y + j) * moduleSize, moduleSize, moduleSize);
-        }
-      }
-    }
-  };
-
-  drawFinder(0, 0);
-  drawFinder(moduleCount - 7, 0);
-  drawFinder(0, moduleCount - 7);
-
-  // Fill data area with URL-derived pattern
-  for (let i = 0; i < moduleCount; i++) {
-    for (let j = 0; j < moduleCount; j++) {
-      // Skip finder patterns
-      if ((i < 8 && j < 8) || (i >= moduleCount - 8 && j < 8) || (i < 8 && j >= moduleCount - 8)) continue;
-      if (Math.abs(hash(url, i * moduleCount + j)) % 3 !== 0) {
-        ctx.fillRect(i * moduleSize, j * moduleSize, moduleSize, moduleSize);
-      }
-    }
-  }
-}
