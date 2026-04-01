@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
+import { FaGithub } from 'react-icons/fa6';
 import { projects } from '../data';
 
 export function ProjectSection() {
@@ -18,16 +19,36 @@ export function ProjectSection() {
       
       <div className="project-grid">
         {projects.map((project, index) => (
-          <a
-            key={index}
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="project-card"
-          >
+          <div key={index} className="project-card">
             <div className="project-title">
-              {project.title}
-              <ExternalLink size={16} className="external-link-icon" style={{ opacity: 1, color: "var(--text-tertiary)" }} />
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="project-title-link"
+              >
+                {project.title}
+              </a>
+              <div className="project-title-icons">
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="project-card-icon-link"
+                  aria-label={`${project.title} — live site`}
+                >
+                  <ExternalLink size={16} />
+                </a>
+                <a
+                  href={project.githubRepo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="project-card-icon-link"
+                  aria-label={`${project.title} — GitHub repository`}
+                >
+                  <FaGithub size={16} />
+                </a>
+              </div>
             </div>
             <p className="project-description">{project.description}</p>
             <div className="project-tech">
@@ -37,7 +58,7 @@ export function ProjectSection() {
                 </span>
               ))}
             </div>
-          </a>
+          </div>
         ))}
       </div>
     </motion.section>

@@ -87,16 +87,6 @@ export const writings = {
     "i host my thoughts on medium rather than building a custom site. instead of overengineering and reinventing the wheel, i prefer leveraging a mature platform that lets me focus on what matters: sharing insights on ai systems, product strategy, and technical architecture.",
 };
 
-export const library = {
-  description: "and many more, these are just one of my best reads",
-  books: [
-    { title: "Zero to One", author: "Peter Thiel" },
-    { title: "The Lean Startup", author: "Eric Ries" },
-    { title: "Designing Data-Intensive Applications", author: "Martin Kleppmann" },
-    { title: "Clean Code", author: "Robert C. Martin" },
-    { title: "The Pragmatic Programmer", author: "Andy Hunt & Dave Thomas" },
-  ],
-};
 
 export const aboutMe = {
   paragraphs: [
@@ -111,19 +101,22 @@ export const projects = [
     title: "AskMyNotes",
     description: "An intuitive web application for organizing, storing, and asking questions against your personal notes using AI.",
     url: "https://ask-my-notes-kryptonian-coders.vercel.app/",
-    tech: ["React", "TypeScript", "Vite" ,"Gemini API"]
+    tech: ["React", "TypeScript", "Vite" ,"Gemini API"],
+    githubRepo: "https://github.com/divyam-jha123/AskMyNotes-Kryptonian-coders-"
   },
   {
     title: "Blogify",
     description: "A full-stack blogging platform with comprehensive user authentication, allowing users to create, read, and manage articles.",
     url: "https://blogging-application-eight.vercel.app/",
-    tech: ["Express","Node.js", "MongoDB" ,"ejs"]
+    tech: ["Express","Node.js", "MongoDB" ,"ejs"],
+    githubRepo: "https://github.com/divyam-jha123/Blogify"
   },
   {
     title: "Brain Expo",
     description: "An interactive online platform and exhibition space designed to showcase innovative ideas and connect creators.",
     url: "https://www.brainexpo.me/",
-    tech: ["TypeScript ","React", "Tailwind CSS", "Vite"]
+    tech: ["TypeScript ","React", "Tailwind CSS", "Vite"],
+    githubRepo: "https://github.com/divyam-jha123/Second-Brain"
   }
 ];
 

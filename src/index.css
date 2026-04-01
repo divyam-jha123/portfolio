@@ -807,7 +807,42 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
 }
+
+.project-title-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  flex: 1;
+  min-width: 0;
+}
+
+.project-title-link:hover {
+  color: var(--accent);
+}
+
+.project-title-icons {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.project-card-icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  color: var(--text-tertiary);
+  opacity: 0.65;
+  transition: opacity 0.2s, color 0.2s;
+}
+
+.project-card-icon-link:hover {
+  opacity: 1;
+  color: var(--text-primary);
+}
+
 
 .project-description {
   font-size: 14px;
