@@ -51,6 +51,18 @@ And the journey of building will never stop.
 
 };
 
+export const experiences = [
+  {
+    role: "LFX Mentee — Paladin Java SDK",
+    organization: "Linux Foundation Decentralized Trust (LFDT)",
+    year: "June'25 - Present",
+    points: [
+      "Building the Java SDK for Paladin, a privacy-preserving blockchain platform, covering all nine JSON-RPC namespaces over HTTP and WebSocket transport.",
+      "Designed a multi-module Gradle architecture and authored RFCs defining the SDK's public API surface.",
+    ],
+  },
+];
+
 export const education = {
   institution: "vedam school of techonolgy",
   year: "2025 - Surviving",
