@@ -19,7 +19,6 @@ function App() {
         <HeroSection />
         <ProjectSection />
         <ExperienceSection />
-        <InBetweenSection />
         <EducationSection />
         <TechStackSection />
         <BlogSection />
