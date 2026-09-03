@@ -10,7 +10,7 @@ export function BlogSection() {
       viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.5 }}
     >
-      <div className="section-label">Writings & Blogs</div>
+      <h2 className="section-label">Writings & Blogs</h2>
       <p className="blog-description">
         i host my thoughts on{' '}
         <a

@@ -10,12 +10,49 @@ import QRCode from 'qrcode';
 export function Dock() {
   const [showQR, setShowQR] = useState(false);
   const qrCanvasRef = useRef<HTMLCanvasElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+
+  // Escape to dismiss, Tab kept inside the dialog, focus returned to the
+  // trigger on close.
+  useEffect(() => {
+    if (!showQR) return;
+
+    modalRef.current?.querySelector<HTMLElement>('.qr-close')?.focus();
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setShowQR(false);
+        return;
+      }
+      if (e.key !== 'Tab') return;
+      const focusable = modalRef.current?.querySelectorAll<HTMLElement>(
+        'button, [href], canvas[tabindex], [tabindex]:not([tabindex="-1"])'
+      );
+      if (!focusable?.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.removeEventListener('keydown', onKeyDown);
+      triggerRef.current?.focus();
+    };
+  }, [showQR]);
 
   useEffect(() => {
     if (showQR && qrCanvasRef.current) {
       QRCode.toCanvas(
         qrCanvasRef.current,
-        'https://divyamjha.vercel.app/',
+        typeof window !== 'undefined' ? window.location.origin + '/' : 'https://divyamjha.vercel.app/',
         {
           width: 200,
           margin: 1,
@@ -40,11 +77,15 @@ export function Dock() {
         transition={{ delay: 0.3, type: 'spring', stiffness: 200, damping: 20 }}
       >
         <motion.button
+          ref={triggerRef}
+          type="button"
           className="dock-item"
           onClick={() => setShowQR(true)}
           whileHover={{ scale: 1.15 }}
           whileTap={{ scale: 0.95 }}
-          title="QR Code"
+          title="Show QR code for this page"
+          aria-label="Show QR code for this page"
+          aria-haspopup="dialog"
         >
           <QrCode size={18} />
         </motion.button>
@@ -59,6 +100,7 @@ export function Dock() {
           whileHover={{ scale: 1.15 }}
           whileTap={{ scale: 0.95 }}
           title="GitHub"
+          aria-label="GitHub profile (opens in a new tab)"
         >
           <FaGithub size={18} />
         </motion.a>
@@ -71,6 +113,7 @@ export function Dock() {
           whileHover={{ scale: 1.15 }}
           whileTap={{ scale: 0.95 }}
           title="LinkedIn"
+          aria-label="LinkedIn profile (opens in a new tab)"
         >
           <FaLinkedin size={18} />
         </motion.a>
@@ -83,6 +126,7 @@ export function Dock() {
           whileHover={{ scale: 1.15 }}
           whileTap={{ scale: 0.95 }}
           title="X (Twitter)"
+          aria-label="X (Twitter) profile (opens in a new tab)"
         >
           <FaXTwitter size={18} />
         </motion.a>
@@ -99,15 +143,19 @@ export function Dock() {
             onClick={() => setShowQR(false)}
           >
             <motion.div
+              ref={modalRef}
               className="qr-modal"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="qr-modal-title"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <h3>Scan to visit</h3>
+              <h2 id="qr-modal-title">Scan to visit</h2>
               <canvas ref={qrCanvasRef} width={200} height={200} style={{ imageRendering: 'pixelated' }} />
-              <button className="qr-close" onClick={() => setShowQR(false)}>
+              <button type="button" className="qr-close" onClick={() => setShowQR(false)}>
                 Close
               </button>
             </motion.div>

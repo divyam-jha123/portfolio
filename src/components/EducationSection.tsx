@@ -11,17 +11,13 @@ export function EducationSection() {
       viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.5 }}
     >
-        <div className="section-label">Education</div>
+        <h2 className="section-label">Education</h2>
         <div className="education-entry">
-          <div style={{display: 'flex', justifyContent: 'space-between'}}>
-            <span className='education-institution'>
-              {education.institution}
-            </span>
-            <span className='education-year'>
-              {education.degree}
-            </span>
-            </div>
-          <span className="education-year">{education.year}</span>
+          <div className="entry-header">
+            <h3 className="entry-title">{education.institution}</h3>
+            <span className="entry-date">{education.year}</span>
+          </div>
+          <p className="entry-org">{education.degree}</p>
         </div>
     </motion.section>
   );

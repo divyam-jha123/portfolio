@@ -19,9 +19,9 @@ export function HeroSection() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
     >
-      <div className="hero-image" aria-label={`${personalInfo.name} profile`} />
+      <div className="hero-image" role="presentation" aria-hidden="true" />
 
-      <h1 className="hero-name">{personalInfo.name}</h1>
+      <h1 className="hero-name-sr">{personalInfo.name}</h1>
 
       <div className="hero-meta">
         <span>{personalInfo.pronunciation}</span>
@@ -54,11 +54,14 @@ export function HeroSection() {
   );
 }
 
+const istFormatter = new Intl.DateTimeFormat('en-GB', {
+  timeZone: 'Asia/Kolkata',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit',
+  hour12: false,
+});
+
 function getISTTime(): string {
-  const now = new Date();
-  const ist = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
-  const hours = ist.getHours().toString().padStart(2, '0');
-  const minutes = ist.getMinutes().toString().padStart(2, '0');
-  const seconds = ist.getSeconds().toString().padStart(2, '0');
-  return `${hours}:${minutes}:${seconds}`;
+  return istFormatter.format(new Date());
 }

@@ -12,7 +12,7 @@ export function ProjectSection() {
       viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.5 }}
     >
-      <div className="section-label">Projects</div>
+      <h2 className="section-label">Projects</h2>
       <p className="tech-stack-description">
         Here are some of the projects I've built -
       </p>

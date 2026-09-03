@@ -10,14 +10,14 @@ export function ExperienceSection() {
       viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.5 }}
     >
-      <div className="section-label">Experience</div>
+      <h2 className="section-label">Experience</h2>
       {experiences.map((exp) => (
         <div className="experience-entry" key={exp.role}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', gap: '16px' }}>
-            <span className="education-institution">{exp.role}</span>
-            <span className="education-year">{exp.year}</span>
+          <div className="entry-header">
+            <h3 className="entry-title">{exp.role}</h3>
+            <span className="entry-date">{exp.year}</span>
           </div>
-          <span className="education-year">{exp.organization}</span>
+          <p className="entry-org">{exp.organization}</p>
           <ul className="experience-points">
             {exp.points.map((point) => (
               <li key={point}>{point}</li>

@@ -10,7 +10,7 @@ export function ContactSection() {
       viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.5 }}
     >
-      <div className="section-label">Get in Touch</div>
+      <h2 className="section-label">Get in Touch</h2>
       <p className="contact-content">
         connect with me on{' '}
         <a href={socials.linkedin} target="_blank" rel="noopener noreferrer">

@@ -15,7 +15,7 @@ export const personalInfo = {
         " with keen curiosity across engineering, product strategy, and user-centric design.",
     },
     {
-      text: "a ",
+      text: "A ",
       links: [
         {
           label: "polymath",

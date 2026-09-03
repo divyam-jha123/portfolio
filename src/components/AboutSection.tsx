@@ -10,7 +10,7 @@ export function AboutSection() {
       viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.5 }}
     >
-      <div className="section-label">Thing about me</div>
+      <h2 className="section-label">Thing about me</h2>
       <div className="about-content">
         {aboutMe.paragraphs.map((p, i) => (
           <p key={i}>{p}</p>
