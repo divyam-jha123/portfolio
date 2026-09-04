@@ -4,7 +4,7 @@
   --bg-primary: #f5f5f7;
   --bg-secondary: #eeeef0;
   --text-primary: #0a0a0a;
-  --text-secondary: #6b7280;
+  --text-secondary: #656d7a;
   --text-tertiary: #9ca3af;
   --border-color: #e5e7eb;
   --accent: #3b82f6;
@@ -17,6 +17,10 @@
   --toggle-bg: #e5e7eb;
   --toggle-icon: #6b7280;
   --divider: #e5e7eb;
+  --status-live: #15803d;
+  --status-live-soft: rgba(21, 128, 61, 0.12);
+  --status-building: #b45309;
+  --status-building-soft: rgba(180, 83, 9, 0.12);
   --font-sans:
     "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", "Fira Code", monospace;
@@ -39,6 +43,10 @@
   --toggle-bg: #27272a;
   --toggle-icon: #a1a1aa;
   --divider: #27272a;
+  --status-live: #4ade80;
+  --status-live-soft: rgba(74, 222, 128, 0.14);
+  --status-building: #fbbf24;
+  --status-building-soft: rgba(251, 191, 36, 0.14);
 }
 
 * {
@@ -104,19 +112,38 @@ img {
   max-height: 1000px;
 }
 
-.section-box {
-  border: 1px solid var(--border-color);
-  padding: 20px;
-  border-radius: 12px;
-}
 /* Section label (like "EXPERIENCE") */
+/* Type roles. Every adjacent pair differs on at least two axes — size and
+   weight, or weight and color — so heading, intro, sub-header, body, and
+   metadata read as different jobs before the copy is read. */
 .section-label {
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--section-label);
-  margin-bottom: 32px;
+  margin-bottom: 20px;
+}
+
+/* Section intro: the lede. Larger and darker than body, regular weight. */
+.section-intro {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  margin-bottom: 28px;
+}
+
+/* Entry sub-header: the line under a title (organization, degree). Medium
+   weight and primary color separate it from the gray 400 body beneath. */
+.entry-org {
+  margin-top: 4px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--text-primary);
 }
 
 /* Underlined link style */
@@ -142,13 +169,6 @@ img {
 }
 
 /* Small external link icon */
-.external-link-icon {
-  display: inline-flex;
-  align-items: center;
-  margin-left: 6px;
-  opacity: 0.5;
-  transition: opacity 0.2s;
-}
 
 .external-link-icon:hover {
   opacity: 1;
@@ -251,6 +271,9 @@ img {
   background-position: center;
   background-repeat: no-repeat;
   mix-blend-mode: darken;
+  /* The face sits ~1% right of the canvas center in the baked art; nudge the
+     box the other way. Percent of own width, so the mobile box scales with it. */
+  transform: translateX(-1%);
 }
 
 [data-theme="dark"] .hero-image {
@@ -303,50 +326,10 @@ img {
   border-bottom: none;
 }
 
-.experience-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-bottom: 8px;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.experience-company {
-  font-size: 18px;
-  font-weight: 700;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
 .experience-company a {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-}
-
-.experience-badge {
-  font-size: 11px;
-  font-weight: 600;
-  padding: 2px 8px;
-  border-radius: 4px;
-  background-color: var(--bg-secondary);
-  color: var(--text-secondary);
-  border: 1px solid var(--border-color);
-}
-
-.experience-meta {
-  font-size: 14px;
-  color: var(--text-secondary);
-  margin-bottom: 12px;
-}
-
-.experience-summary {
-  font-size: 15px;
-  color: var(--text-secondary);
-  line-height: 1.7;
-  margin-bottom: 12px;
 }
 
 .view-more-btn {
@@ -368,25 +351,6 @@ img {
   color: var(--text-primary);
 }
 
-.experience-details {
-  overflow: hidden;
-}
-
-.experience-details ul {
-  list-style: none;
-  padding: 0;
-  margin-top: 12px;
-}
-
-.experience-details li {
-  font-size: 14px;
-  color: var(--text-secondary);
-  line-height: 1.7;
-  margin-bottom: 12px;
-  padding-left: 16px;
-  position: relative;
-}
-
 .experience-details li::before {
   content: "–";
   position: absolute;
@@ -394,29 +358,7 @@ img {
   color: var(--text-tertiary);
 }
 
-/* In Between section */
-.in-between-content {
-  font-size: 15px;
-  color: var(--text-secondary);
-  line-height: 1.8;
-}
-
-.in-between-content p {
-  margin-bottom: 16px;
-}
-
-.in-between-content strong {
-  color: var(--text-primary);
-  font-weight: 600;
-}
-
 /* Tech Stack */
-.tech-stack-description {
-  font-size: 15px;
-  color: var(--text-secondary);
-  margin-bottom: 24px;
-  line-height: 1.7;
-}
 
 /* Marquee wrapper */
 .marquee-wrapper {
@@ -525,12 +467,11 @@ img {
 }
 
 .tech-category h3 {
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--text-tertiary);
-  margin-bottom: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  margin-bottom: 12px;
 }
 
 .tech-category ul {
@@ -556,150 +497,19 @@ img {
 }
 
 /* Recommendations */
-.recommendation-entry {
-  margin-bottom: 40px;
-  padding-bottom: 40px;
-  border-bottom: 1px solid var(--divider);
-}
-
-.recommendation-entry:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-.recommendation-author {
-  margin-bottom: 12px;
-}
-
-.recommendation-author a {
-  font-weight: 600;
-  font-size: 16px;
-  color: var(--accent);
-}
-
-.recommendation-text {
-  font-size: 15px;
-  color: var(--text-secondary);
-  line-height: 1.8;
-  font-style: italic;
-}
-
-/* Publications */
-.publication-entry {
-  margin-bottom: 32px;
-}
-
-.publication-conference {
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--text-tertiary);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 8px;
-}
-
-.publication-title {
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 8px;
-  line-height: 1.5;
-}
-
-.publication-authors {
-  font-size: 14px;
-  color: var(--text-secondary);
-  margin-bottom: 8px;
-}
-
-.publication-link {
-  font-size: 13px;
-  color: var(--accent);
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  margin-bottom: 12px;
-}
-
-.publication-abstract {
-  font-size: 14px;
-  color: var(--text-tertiary);
-  line-height: 1.7;
-}
-
-.publication-abstract summary {
-  cursor: pointer;
-  font-weight: 500;
-  color: var(--text-secondary);
-  margin-bottom: 8px;
-}
-
-/* Videos */
-.videos-description {
-  font-size: 15px;
-  color: var(--text-secondary);
-  margin-bottom: 16px;
-  line-height: 1.7;
-}
-
-.video-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 15px;
-  color: var(--text-primary);
-  font-weight: 500;
-}
 
 /* Blog */
 .blog-description {
-  font-size: 15px;
+  font-size: 16px;
   color: var(--text-secondary);
-  line-height: 1.8;
-}
-
-/* Library */
-.library-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px;
-  margin-bottom: 16px;
-}
-
-.book-card {
-  padding: 16px;
-  border-radius: 12px;
-  border: 1px solid var(--border-color);
-  background: var(--card-bg);
-  transition: all 0.2s ease;
-}
-
-.book-card:hover {
-  border-color: var(--text-tertiary);
-  transform: translateY(-2px);
-}
-
-.book-title {
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 4px;
-}
-
-.book-author {
-  font-size: 13px;
-  color: var(--text-tertiary);
-}
-
-.library-note {
-  font-size: 13px;
-  color: var(--text-tertiary);
-  font-style: italic;
+  line-height: 1.6;
 }
 
 /* About section */
 .about-content {
-  font-size: 15px;
+  font-size: 16px;
   color: var(--text-secondary);
-  line-height: 1.8;
+  line-height: 1.6;
 }
 
 .about-content p {
@@ -708,9 +518,9 @@ img {
 
 /* Contact */
 .contact-content {
-  font-size: 15px;
+  font-size: 16px;
   color: var(--text-secondary);
-  line-height: 1.8;
+  line-height: 1.6;
 }
 
 .contact-content a {
@@ -742,8 +552,8 @@ img {
 .experience-points li {
   position: relative;
   padding-left: 16px;
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: 15px;
+  line-height: 1.55;
   color: var(--text-secondary);
 }
 
@@ -757,17 +567,6 @@ img {
 .education-entry {
   font-size: 15px;
   color: var(--text-secondary);
-}
-
-.education-year {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  color: var(--text-tertiary);
-}
-
-.education-institution {
-  font-size: 15px;
-  color: var(--text-primary);
 }
 
 /* QR code modal */
@@ -840,8 +639,10 @@ img {
 }
 
 .project-title {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
   margin-bottom: 8px;
   color: var(--text-primary);
   display: flex;
@@ -883,11 +684,10 @@ img {
   color: var(--text-primary);
 }
 
-
 .project-description {
-  font-size: 14px;
+  font-size: 15px;
   color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: 1.55;
   margin-bottom: 16px;
   flex-grow: 1;
 }
@@ -910,17 +710,6 @@ img {
 }
 
 /* Section title for non-label sections */
-.section-title {
-  font-size: 22px;
-  font-weight: 800;
-  margin-bottom: 8px;
-}
-.section-subtitle {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--text-secondary);
-  margin-bottom: 20px;
-}
 
 /* Responsive */
 @media (max-width: 640px) {
@@ -930,6 +719,40 @@ img {
 
   .hero-bio {
     font-size: 16px;
+  }
+
+  .section-label {
+    font-size: 12px;
+  }
+
+  .section-intro {
+    font-size: 16px;
+  }
+
+  .blog-description,
+  .about-content,
+  .contact-content {
+    font-size: 15px;
+  }
+
+  .project-description,
+  .experience-points li,
+  .product-note {
+    font-size: 14px;
+  }
+
+  .project-title,
+  .entry-title {
+    font-size: 18px;
+  }
+
+  .entry-org {
+    font-size: 14px;
+  }
+
+  .entry-date,
+  .product-meta {
+    font-size: 13px;
   }
 
   .hero-image {
@@ -968,7 +791,6 @@ img {
     margin: 0 4px;
   }
 }
-
 
 /* Accessible name for the hero: the portrait art carries the lettering, but the
    name has to exist as text for search, translation, print, and screen readers. */
@@ -1046,22 +868,18 @@ img {
 }
 
 .entry-title {
-  font-size: 17px;
+  font-size: 20px;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
   color: var(--text-primary);
 }
 
 .entry-date {
   flex-shrink: 0;
   font-family: var(--font-mono);
-  font-size: 13px;
-  color: var(--text-secondary);
-}
-
-.entry-org {
-  margin-top: 2px;
-  font-size: 15px;
+  font-size: 14px;
+  line-height: 1.5;
   color: var(--text-secondary);
 }
 
@@ -1091,4 +909,575 @@ img {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Products: the two things with his own name on them. Heavier than the project
+   cards on purpose — full-column blocks, 28px titles, a real button row. */
+.product-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.product {
+  padding: 28px;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  background: var(--card-bg);
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.product:hover {
+  border-color: var(--text-tertiary);
+  box-shadow: 0 12px 32px -20px rgba(0, 0, 0, 0.45);
+}
+
+.product-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.product-name {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.product-status {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.product-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.product-status--live {
+  color: var(--status-live);
+  background: var(--status-live-soft);
+}
+
+.product-status--live .product-status-dot {
+  animation: product-pulse 2.4s ease-out infinite;
+}
+
+.product-status--building {
+  color: var(--status-building);
+  background: var(--status-building-soft);
+}
+
+@keyframes product-pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--status-live-soft);
+  }
+  70% {
+    box-shadow: 0 0 0 7px rgba(0, 0, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+}
+
+.product-meta {
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.product-meta-sep {
+  color: var(--border-color);
+}
+
+.product-description {
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* Paragraph breaks inside one description sit tighter than the gap that
+   separates the description from the meta line above it. */
+.product-description + .product-description {
+  margin-top: 14px;
+}
+
+.product-note {
+  margin-top: 12px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.product-actions {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Button system. The page had text buttons only until Products needed a
+   primary action. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn--primary {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+.btn--primary:hover {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.btn--secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.btn--secondary:hover {
+  border-color: var(--text-secondary);
+  background: var(--bg-secondary);
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  color: var(--text-secondary);
+  background: transparent;
+  border-style: dashed;
+  border-color: var(--border-color);
+  transform: none;
+}
+
+.btn-soon {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+@media (max-width: 640px) {
+  .product {
+    padding: 22px 18px;
+  }
+
+  .product-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .product-name {
+    font-size: 24px;
+  }
+
+  .product-description {
+    font-size: 15px;
+  }
+
+  .product-actions .btn {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-status--live .product-status-dot {
+    animation: none;
+  }
+}
+
+/* Writing — a reading surface. Same column and palette as the portfolio, but
+   the type is set for sustained reading: bigger body, more leading, and body
+   copy in primary rather than the secondary gray the index uses for summaries. */
+.article {
+  padding-bottom: 24px;
+}
+
+.article-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 40px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--text-secondary);
+  transition: color 0.2s ease;
+}
+
+.article-back:hover {
+  color: var(--text-primary);
+}
+
+/* The 40px heading tier the index never had a use for. */
+.article-title {
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+}
+
+.article-dek {
+  margin-top: 16px;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: var(--text-secondary);
+}
+
+.article-meta {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.article-meta-sep {
+  color: var(--border-color);
+}
+
+.article-body {
+  margin-top: 44px;
+}
+
+.article-body p {
+  font-size: 18px;
+  line-height: 1.75;
+  color: var(--text-primary);
+}
+
+.article-body p + p {
+  margin-top: 20px;
+}
+
+/* More room above a heading than below it: it belongs to what follows. */
+.article-h2 {
+  margin-top: 48px;
+  margin-bottom: 16px;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.article-quote {
+  margin: 36px 0;
+  padding-left: 24px;
+  border-left: 1px solid var(--border-color);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.article-footer {
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 1px solid var(--divider);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+@media (max-width: 640px) {
+  .article-back {
+    margin-bottom: 32px;
+  }
+
+  .article-title {
+    font-size: 30px;
+  }
+
+  .article-dek {
+    font-size: 17px;
+  }
+
+  .article-body p {
+    font-size: 17px;
+  }
+
+  .article-h2 {
+    margin-top: 40px;
+    font-size: 22px;
+  }
+
+  .article-quote {
+    margin: 28px 0;
+    padding-left: 18px;
+    font-size: 20px;
+  }
+
+  .article-footer .btn {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+}
+
+/* Rich text from the blog API. The API's own inline styles are stripped on
+   parse, so every rule the post needs lives here. */
+.article-body h2 {
+  margin-top: 48px;
+  margin-bottom: 16px;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.article-body h3 {
+  margin-top: 36px;
+  margin-bottom: 12px;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+
+.article-body ul,
+.article-body ol {
+  margin: 20px 0;
+  padding-left: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.article-body li {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--text-primary);
+}
+
+.article-body li::marker {
+  color: var(--text-tertiary);
+}
+
+.article-body strong {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.article-body em {
+  font-style: italic;
+}
+
+.article-body a {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-decoration-color: var(--text-tertiary);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s ease;
+}
+
+.article-body a:hover {
+  text-decoration-color: var(--text-primary);
+}
+
+.article-body blockquote {
+  margin: 36px 0;
+  padding-left: 24px;
+  border-left: 1px solid var(--border-color);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.article-body code {
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+.article-cover {
+  display: block;
+  width: 100%;
+  margin-top: 32px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+/* Loading state: the article's own shape, so nothing jumps when content lands. */
+.skeleton {
+  border-radius: 6px;
+  background: var(--bg-secondary);
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--card-bg),
+    transparent
+  );
+  animation: skeleton-sweep 1.4s ease-in-out infinite;
+}
+
+@keyframes skeleton-sweep {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.skeleton-title {
+  height: 44px;
+  margin-bottom: 12px;
+}
+
+.skeleton-title--short {
+  width: 55%;
+}
+
+.skeleton-meta {
+  height: 18px;
+  width: 240px;
+  margin-top: 20px;
+}
+
+.skeleton-line {
+  height: 16px;
+  margin-bottom: 14px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after {
+    animation: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .article-body h2 {
+    margin-top: 40px;
+    font-size: 22px;
+  }
+
+  .article-body h3 {
+    font-size: 18px;
+  }
+
+  .article-body li {
+    font-size: 17px;
+  }
+
+  .article-body blockquote {
+    margin: 28px 0;
+    padding-left: 18px;
+    font-size: 20px;
+  }
+
+  .skeleton-title {
+    height: 34px;
+  }
+}
+
+/* Glossary: first mention of a technical term, linked to Wikipedia. A dotted
+   rule reads as "definition available" and stays distinct from the solid
+   underline the post's own links use, so ~19 of them don't shred the page. */
+/* Qualified with `.article-body a` so it outranks that rule's `text-decoration`
+   shorthand, which would otherwise reset the style back to solid. The post's own
+   links keep the solid underline — a real link, not a definition. */
+.article-body a.glossary-link {
+  color: inherit;
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: var(--text-tertiary);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.2s ease, color 0.2s ease;
+}
+
+.article-body a.glossary-link:hover {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+
+/* Inline links inside a message page's supporting text. */
+.article-inline-link {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-decoration-color: var(--text-tertiary);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s ease;
+}
+
+.article-inline-link:hover {
+  text-decoration-color: var(--text-primary);
 }

@@ -28,29 +28,6 @@ export const personalInfo = {
   ],
 };
 
-export const inBetweenExperiences = {
-  title: "In Between These Learnings",
-  subtitle: "The Product Building Journey",
-  content: `I've been building and experimenting on the product side for a long time. Each previous product always feels naive in hindsight, but looking back, I can see they were incrementally better, each iteration teaching me something new about users, infrastructure, and what it takes to build something people actually want.\n\n
-  It started with participating in various hackathons, where I found my love for building products and solving real-world problems.
-  So I built BrainExpo, a platform to store and share various kinds of links like YouTube, LinkedIn, GitHub, Twitter, any document, etc. \n\n
-  I saw a problem: we never look back at our bookmarks. We eventually forget that we have saved something important,
-  because bookmarks are not designed for thinking or learning — they're just storage.\n\n
-  But BrainExpo keeps the user updated with weekly insights on their saved links.\n\n
-  But what next for BrainExpo?\n
-  Pivot - \n\n
-  One day someone asked me why anyone would pay for this when free options are already available with ease.\n\n
-  Then I re-thought this, and I remembered a thing from my childhood: how I used to spend hours finding that one photo of me and my brother in a gallery of 1000 photos.\n\n
-  And after so many years, the exact problem still exists…\n\n
-  And the main problem is not with individuals — it's with the agencies who have lakhs of videos, frames, pictures, etc.\n\n
-Finding that one frame inside lakhs of videos and millions of frames is a headache.\n\n
-Hence, I decided to rebuild BrainExpo as a search engine for photos, videos, files, documents — anything and everything.\n\n
-And the journey of building will never stop.
-
-`
-
-};
-
 export const experiences = [
   {
     role: "LFX Mentee — Paladin Java SDK",
@@ -146,3 +123,109 @@ export const socials = {
   email: "divyamjha.70055594@gmail.com",
 
 };
+
+type ProductAction = {
+  label: string;
+  url: string;
+  variant: "primary" | "secondary";
+};
+
+export type Product = {
+  name: string;
+  role: string;
+  period: string;
+  status: "live" | "building";
+  statusLabel: string;
+  description: string[];
+  note?: string;
+  actions: ProductAction[];
+};
+
+export const products: Product[] = [
+  {
+    name: "BrainExpo",
+    role: "Developer & Product",
+    period: "2026 — Present",
+    status: "live",
+    statusLabel: "Live",
+    description: [
+      "I kept saving things on the internet and almost never coming back to them. So I built BrainExpo.",
+      "It’s a second brain for the things you don’t want to lose — links, ideas, resources, notes, and everything else you tell yourself you’ll revisit later. BrainExpo keeps them in one place and brings them back to you through weekly reminders, so saved doesn’t become forgotten.",
+    ],
+    actions: [
+      { label: "Visit BrainExpo", url: "https://www.brainexpo.me/", variant: "primary" },
+      { label: "Case study", url: "/writing/brainexpo", variant: "secondary" },
+    ],
+  },
+  {
+    name: "Vorkium",
+    role: "Founder & Engineering",
+    period: "2026 — Present",
+    status: "building",
+    statusLabel: "In development",
+    description: [
+      "Remote work gave us meetings, messages and tabs. It never really gave us a place to work together.",
+      "Vorkium is a virtual workspace where remote teams can actually feel present — move around a shared space, walk up to someone, start a conversation, collaborate, and work together without scheduling another call.",
+      "I’m currently building the product from the ground up — from the virtual world and interactions to the systems underneath it.",
+    ],
+    note: "Not ready yet. Still being built in the open.",
+    actions: [
+      { label: "Follow the journey", url: "", variant: "secondary" },
+    ],
+  },
+];
+
+/** Blogify is the CMS behind /writing — my own blogging app. Linked from the
+ *  failure states so a reader can still reach the writing when the fetch or the
+ *  proxy is having a bad day. */
+export const BLOGIFY_SITE = "https://blogging-application-eight.vercel.app";
+export const blogifyPostUrl = (postId: string) => `${BLOGIFY_SITE}/blog/${postId}`;
+
+/** Posts are authored in Blogify and fetched at runtime. `/api/blog` is a
+ *  same-origin proxy to that API — see vercel.json and vite.config.ts; the
+ *  upstream sends no CORS headers, so the browser can't call it directly. */
+export const BLOG_API_BASE = "/api/blog";
+
+export type BlogPost = {
+  id: string;
+  title: string;
+  body: string;
+  coverImageUrl?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  author?: { userName?: string; profileImageURL?: string };
+};
+
+/**
+ * Jargon a non-technical reader shouldn't have to already know. Only the FIRST
+ * occurrence of each term in a post is linked — linking every repeat turns the
+ * prose into a minefield. A term written with a capital is matched
+ * case-sensitively so the proper noun "Express" never catches the verb.
+ * Every destination was checked against the MediaWiki API.
+ */
+export const glossary: { term: string; url: string }[] = [
+  { term: "full-stack application", url: "https://en.wikipedia.org/wiki/Full-stack_developer" },
+  { term: "browser extension", url: "https://en.wikipedia.org/wiki/Browser_extension" },
+  { term: "user experience", url: "https://en.wikipedia.org/wiki/User_experience" },
+  { term: "market research", url: "https://en.wikipedia.org/wiki/Market_research" },
+  { term: "Stack Overflow", url: "https://en.wikipedia.org/wiki/Stack_Overflow" },
+  { term: "landing page", url: "https://en.wikipedia.org/wiki/Landing_page" },
+  { term: "open source", url: "https://en.wikipedia.org/wiki/Open-source_software" },
+  { term: "DNS records", url: "https://en.wikipedia.org/wiki/Domain_Name_System" },
+  { term: "authentication", url: "https://en.wikipedia.org/wiki/Authentication" },
+  { term: "deployment", url: "https://en.wikipedia.org/wiki/Software_deployment" },
+  { term: "debugging", url: "https://en.wikipedia.org/wiki/Debugging" },
+  { term: "frontend", url: "https://en.wikipedia.org/wiki/Front_end_and_back_end" },
+  { term: "backend", url: "https://en.wikipedia.org/wiki/Front_end_and_back_end" },
+  { term: "React", url: "https://en.wikipedia.org/wiki/React_(software)" },
+  { term: "Express", url: "https://en.wikipedia.org/wiki/Express.js" },
+  { term: "server", url: "https://en.wikipedia.org/wiki/Server_(computing)" },
+  { term: "cloud", url: "https://en.wikipedia.org/wiki/Cloud_computing" },
+  { term: "repo", url: "https://en.wikipedia.org/wiki/Repository_(version_control)" },
+  { term: "SPF", url: "https://en.wikipedia.org/wiki/Sender_Policy_Framework" },
+];
+
+/** URL slug -> Blogify post id. Add a row to publish another piece. */
+export const writingRoutes: { slug: string; postId: string }[] = [
+  { slug: "brainexpo", postId: "6a9aedc1df7f3a9f163533d1" },
+];

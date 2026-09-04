@@ -51,7 +51,7 @@ export function TechStackSection() {
       transition={{ duration: 0.5 }}
     >
       <h2 className="section-label">Tech Stack</h2>
-      <p className="tech-stack-description">{techStack.description}</p>
+      <p className="section-intro">{techStack.description}</p>
 
       {/* Marquee carousel */}
       {!isExpanded ? (
