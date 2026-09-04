@@ -15,6 +15,11 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/blog/, '/api/posts'),
       },
+      // Series keep their upstream path; only the origin changes.
+      '/api/series': {
+        target: BLOG_API,
+        changeOrigin: true,
+      },
     },
   },
 })

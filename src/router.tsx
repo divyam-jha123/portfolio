@@ -36,6 +36,7 @@ type LinkProps = {
   children: ReactNode;
   className?: string;
   'aria-label'?: string;
+  'aria-current'?: 'page' | undefined;
 };
 
 /** A real anchor — middle-click, cmd-click, and "copy link" all keep working. */

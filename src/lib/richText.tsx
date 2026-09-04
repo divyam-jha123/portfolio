@@ -1,6 +1,7 @@
 import { Fragment, createElement } from 'react';
 import type { ReactNode } from 'react';
 import { glossary } from '../data';
+import { toHtml } from './markdown';
 
 /**
  * The blog API returns authored HTML. Rendering it with dangerouslySetInnerHTML
@@ -14,12 +15,12 @@ import { glossary } from '../data';
  * technical term to Wikipedia.
  */
 
-const BLOCK_TAGS = new Set(['p', 'h2', 'h3', 'h4', 'ul', 'ol', 'li', 'blockquote', 'pre']);
+const BLOCK_TAGS = new Set(['p', 'h2', 'h3', 'h4', 'ul', 'ol', 'li', 'blockquote', 'pre', 'hr']);
 const INLINE_TAGS = new Set(['strong', 'em', 'code', 'br']);
 const DISCARD_TAGS = new Set(['script', 'style', 'iframe', 'object', 'embed', 'link', 'meta', 'form', 'input']);
 
-/** Headings carry their own weight; code is quoted verbatim. Neither gets glossed. */
-const NO_GLOSS_TAGS = new Set(['h2', 'h3', 'h4', 'code', 'pre', 'a']);
+/** Code is quoted verbatim, and an existing link is already a link. Neither gets glossed. */
+const NO_GLOSS_TAGS = new Set(['code', 'pre', 'a']);
 
 /** b/i are presentational aliases; render them as their semantic counterpart. */
 const TAG_ALIASES: Record<string, string> = { b: 'strong', i: 'em' };
@@ -110,6 +111,7 @@ function renderNode(node: ChildNode, key: number, context: Context): ReactNode {
   );
 
   if (tag === 'br') return <br key={key} />;
+  if (tag === 'hr') return <hr key={key} />;
 
   if (tag === 'a') {
     const href = element.getAttribute('href') ?? '';
@@ -129,17 +131,39 @@ function renderNode(node: ChildNode, key: number, context: Context): ReactNode {
   return <Fragment key={key}>{children}</Fragment>;
 }
 
-export function renderRichText(html: string): ReactNode[] {
-  const parsed = new DOMParser().parseFromString(html, 'text/html');
+/** Accepts either authored HTML or Markdown (series parts) — see `toHtml`. */
+export function renderRichText(body: string): ReactNode[] {
+  const parsed = new DOMParser().parseFromString(toHtml(body), 'text/html');
   const context: Context = { linked: new Set(), glossable: true };
   return Array.from(parsed.body.childNodes).map((node, index) =>
     renderNode(node, index, context),
   );
 }
 
+function parse(body: string): Document {
+  return new DOMParser().parseFromString(toHtml(body), 'text/html');
+}
+
+/**
+ * The first real paragraph, for a listing. A paragraph that is nothing but an
+ * `<em>` — "Post 1 of our build log" — is a byline, not the story, so it's skipped.
+ */
+export function excerpt(body: string, maxLength = 140): string {
+  const first = Array.from(parse(body).querySelectorAll('p')).find((p) => {
+    const text = p.textContent?.trim() ?? '';
+    if (!text) return false;
+    const only = p.children.length === 1 ? p.children[0] : null;
+    return !(only?.tagName === 'EM' && only.textContent?.trim() === text);
+  });
+  const text = (first?.textContent ?? '').replace(/\s+/g, ' ').trim();
+  if (text.length <= maxLength) return text;
+  const cut = text.slice(0, maxLength);
+  return `${cut.slice(0, cut.lastIndexOf(' '))}…`;
+}
+
 /** Plain-text length drives the reading estimate, not the markup. */
-export function estimateReadingTime(html: string): string {
-  const text = new DOMParser().parseFromString(html, 'text/html').body.textContent ?? '';
+export function estimateReadingTime(body: string): string {
+  const text = parse(body).body.textContent ?? '';
   const words = text.trim().split(/\s+/).filter(Boolean).length;
   return `${Math.max(1, Math.round(words / 220))} min read`;
 }
