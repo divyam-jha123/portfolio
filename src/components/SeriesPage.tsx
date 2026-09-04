@@ -359,8 +359,10 @@ function SeriesSkeleton() {
       </div>
       <div className="series-layout" aria-hidden="true">
         <div className="series-index">
-          <div className="skeleton series-card-skeleton" />
-          <div className="skeleton series-card-skeleton" />
+          <ol className="series-list">
+            <li><div className="skeleton series-card-skeleton" /></li>
+            <li><div className="skeleton series-card-skeleton" /></li>
+          </ol>
         </div>
         <div className="article series-article">
           <div className="article-header">
