@@ -13,7 +13,7 @@ export function ProjectSection() {
       transition={{ duration: 0.5 }}
     >
       <h2 className="section-label">Projects</h2>
-      <p className="tech-stack-description">
+      <p className="section-intro">
         Here are some of the projects I've built -
       </p>
       

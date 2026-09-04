@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/blog/:path*",
+      "destination": "https://blogging-application-eight.vercel.app/api/posts/:path*"
+    },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
