@@ -4,6 +4,10 @@
       "source": "/api/blog/:path*",
       "destination": "https://blogging-application-eight.vercel.app/api/posts/:path*"
     },
+    {
+      "source": "/api/series/:path*",
+      "destination": "https://blogging-application-eight.vercel.app/api/series/:path*"
+    },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

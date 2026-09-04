@@ -170,7 +170,7 @@ export const products: Product[] = [
     ],
     note: "Not ready yet. Still being built in the open.",
     actions: [
-      { label: "Follow the journey", url: "", variant: "secondary" },
+      { label: "Follow the journey", url: "/writing/building-vorkium", variant: "secondary" },
     ],
   },
 ];
@@ -186,6 +186,10 @@ export const blogifyPostUrl = (postId: string) => `${BLOGIFY_SITE}/blog/${postId
  *  upstream sends no CORS headers, so the browser can't call it directly. */
 export const BLOG_API_BASE = "/api/blog";
 
+/** Series (multi-part build logs) come from `/api/series`, proxied the same way. */
+export const SERIES_API_BASE = "/api/series";
+export const blogifySeriesUrl = (slug: string) => `${BLOGIFY_SITE}/series/${slug}`;
+
 export type BlogPost = {
   id: string;
   title: string;
@@ -194,6 +198,22 @@ export type BlogPost = {
   createdAt?: string;
   updatedAt?: string;
   author?: { userName?: string; profileImageURL?: string };
+};
+
+/** One post inside a series. Bodies are authored as Markdown, unlike standalone posts. */
+export type SeriesPart = BlogPost & {
+  partNumber: number;
+  series?: { id: string; title: string; slug: string };
+};
+
+export type Series = {
+  id: string;
+  title: string;
+  slug: string;
+  description?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  parts: SeriesPart[];
 };
 
 /**
@@ -223,9 +243,17 @@ export const glossary: { term: string; url: string }[] = [
   { term: "cloud", url: "https://en.wikipedia.org/wiki/Cloud_computing" },
   { term: "repo", url: "https://en.wikipedia.org/wiki/Repository_(version_control)" },
   { term: "SPF", url: "https://en.wikipedia.org/wiki/Sender_Policy_Framework" },
+  { term: "hoarder", url: "https://en.wikipedia.org/wiki/Compulsive_hoarding" },
+  { term: "amnesia", url: "https://en.wikipedia.org/wiki/Amnesia" },
 ];
 
 /** URL slug -> Blogify post id. Add a row to publish another piece. */
 export const writingRoutes: { slug: string; postId: string }[] = [
   { slug: "brainexpo", postId: "6a9aedc1df7f3a9f163533d1" },
+];
+
+/** URL slug -> Blogify series slug. `/writing/<slug>/<n>` deep-links to part n.
+ *  The eyebrow is what the series is *for*, since the API only carries a title. */
+export const seriesRoutes: { slug: string; seriesSlug: string; eyebrow: string }[] = [
+  { slug: "building-vorkium", seriesSlug: "building-vorkium", eyebrow: "Build log" },
 ];
