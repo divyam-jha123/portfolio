@@ -717,6 +717,15 @@ img {
     padding: 60px 16px 140px;
   }
 
+  /* The 16px gutter can't hold a floating 40px control, so on phones the
+     toggle lives in the page header and scrolls away with it rather than
+     sitting over the text column. */
+  .theme-toggle {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+  }
+
   .hero-bio {
     font-size: 16px;
   }
@@ -1629,8 +1638,8 @@ img {
 }
 
 .series-card-skeleton {
+  width: 100%;
   height: 132px;
-  margin-bottom: 10px;
   border-radius: 12px;
 }
 
@@ -1760,22 +1769,30 @@ img {
 
 @media (max-width: 900px) {
   .series-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 36px;
   }
 
-  /* Index becomes a swipeable strip above the article, one card per stop. */
+  /* Index becomes a horizontal strip above the article that the reader
+     swipes right-to-left, one compact card per part ("Part N" + title).
+     Cards are narrower than the viewport so the next one peeks in from the
+     right edge, which is the cue that the strip slides. Excerpt and meta are
+     dropped so the cards stay short. */
   .series-index {
     position: static;
+    min-width: 0;
   }
 
   .series-list {
     flex-direction: row;
-    gap: 12px;
+    gap: 10px;
     margin: 0 -24px;
     padding: 2px 24px;
     overflow-x: auto;
+    overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory;
+    scroll-padding-left: 24px;
+    -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
   }
 
@@ -1784,13 +1801,53 @@ img {
   }
 
   .series-list > li {
-    flex: 0 0 min(280px, 78vw);
+    flex: 0 0 min(300px, 72vw);
     scroll-snap-align: start;
     display: flex;
   }
 
   .series-card {
     width: 100%;
+    gap: 4px;
+    padding: 12px 14px;
+    border-radius: 10px;
+  }
+
+  .series-card-head {
+    font-weight: 600;
+  }
+
+  .series-card--current .series-card-part {
+    color: var(--accent);
+  }
+
+  .series-card-excerpt,
+  .series-card-meta {
+    display: none;
+  }
+
+  .series-card-title {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--text-secondary);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .series-card--current .series-card-title {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .series-card-skeleton {
+    width: 100%;
+    height: 72px;
+    margin-bottom: 0;
+    border-radius: 10px;
   }
 }
 
@@ -1808,6 +1865,11 @@ img {
     grid-template-columns: 1fr;
   }
 
+  /* Stacked, an empty previous/next slot would leave a blank row. */
+  .series-pager > span:empty {
+    display: none;
+  }
+
   .series-pager-link--next {
     text-align: left;
     align-items: flex-start;
@@ -1816,5 +1878,12 @@ img {
   .series-footer-actions .btn {
     flex: 1 1 auto;
     justify-content: center;
+  }
+
+  /* Container gutter is 16px here; keep the strip's bleed matched to it. */
+  .series-list {
+    margin: 0 -16px;
+    padding: 2px 16px;
+    scroll-padding-left: 16px;
   }
 }
