@@ -15,7 +15,7 @@ export function ProjectSection() {
     >
       <h2 className="section-label">Projects</h2>
       <p className="section-intro">
-        Here are some of the projects I've built -
+        Here are some of the projects I’ve built:
       </p>
       
       <div className="project-grid">

@@ -13,14 +13,15 @@ export function ContactSection() {
     >
       <h2 className="section-label">Get in Touch</h2>
       <p className="contact-content">
-        connect with me on{' '}
+        Connect with me on{' '}
         <a href={socials.linkedin} target="_blank" rel="noopener noreferrer">
-          linkedin
+          LinkedIn
         </a>{' '}
-        or shoot an{' '}
+        or shoot me an{' '}
         <a href={`mailto:${socials.email}`}>
           email
         </a>
+        .
       </p>
     </motion.section>
   );

@@ -118,7 +118,7 @@ export function ProductSection() {
     >
       <h2 className="section-label">Products</h2>
       <p className="section-intro">
-        Products I’m building because I wanted them to exist...
+        Products I’m building because I wanted them to exist.
       </p>
 
       <div className="product-list">

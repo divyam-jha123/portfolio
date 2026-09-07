@@ -12,21 +12,20 @@ export function BlogSection() {
       transition={{ duration: 0.5 }}
     >
       <h2 className="section-label">Writings & Blogs</h2>
-      <p className="blog-description">
-        i host my thoughts on{' '}
-        <a
-          href={writings.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="link-underline"
-        >
-          {writings.platform.toLowerCase()}
-        </a>{' '}
-        rather than building a custom site. instead of overengineering and reinventing
-        the wheel, i prefer leveraging a mature platform that lets me focus on what
-        matters: sharing insights on ai systems, product strategy, and technical
-        architecture.
-      </p>
+      {writings.paragraphs.map((paragraph) => (
+        <p className="blog-description" key={paragraph.link.label}>
+          {paragraph.lead}
+          <a
+            href={paragraph.link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link-underline"
+          >
+            {paragraph.link.label}
+          </a>
+          {paragraph.suffix}
+        </p>
+      ))}
     </motion.section>
   );
 }

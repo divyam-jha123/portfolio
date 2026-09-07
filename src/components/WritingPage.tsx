@@ -59,7 +59,7 @@ export function WritingPage({ postId }: { postId: string }) {
   if (state.status === 'missing') {
     return (
       <ArticleMessage
-        title="That post isn't published"
+        title="That post isn’t published"
         body={
           <>
             It may have been unpublished or removed since this link was created.
@@ -73,7 +73,7 @@ export function WritingPage({ postId }: { postId: string }) {
   if (state.status === 'error') {
     return (
       <ArticleMessage
-        title="This post didn't load"
+        title="This post didn’t load"
         body={
           <>
             {state.message} The writing lives on <BlogifyLink />, so this is usually
@@ -229,8 +229,8 @@ export function NotFoundPage() {
       title="Nothing here"
       body={
         <>
-          That page doesn't exist — it may have moved, or the link may be wrong. If
-          you were looking for something I wrote, it's on <BlogifyLink />.
+          That page doesn’t exist — it may have moved, or the link may be wrong. If
+          you were looking for something I wrote, it’s on <BlogifyLink />.
         </>
       }
     />

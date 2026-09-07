@@ -14,7 +14,7 @@ export const personalInfo = {
         },
       ],
       suffix:
-        " with keen curiosity across engineering, product strategy, and user-centric design.",
+        " with a keen curiosity across engineering, product strategy, and user-centric design.",
     },
     {
       text: "A ",
@@ -48,7 +48,7 @@ export const experiences: {
   {
     role: "LFX Mentee — Paladin Java SDK",
     organization: "Linux Foundation Decentralized Trust (LFDT)",
-    year: "June'25 - Present",
+    year: "June 2025 — Present",
     points: [
       "Building the Java SDK for Paladin, a privacy-preserving blockchain platform, covering all nine JSON-RPC namespaces over HTTP and WebSocket transport.",
       "Designed a multi-module Gradle architecture and authored RFCs defining the SDK's public API surface.",
@@ -76,7 +76,7 @@ export const education = {
 
 export const techStack = {
   description:
-    "I'm a generalist at heart who can build with anything, but here's the core stack I've spent the most time with:",
+    "I’m a generalist at heart who can build with anything, but here’s the core stack I’ve spent the most time with:",
   categories: [
     {
       name: "Languages",
@@ -84,31 +84,53 @@ export const techStack = {
     },
     {
       name: "Frontend",
-      items: ["React", "Bootstrap", "Tailwind CSS"],
+      items: ["React", "Bootstrap", "Tailwind CSS", "shadcn/ui", "EJS"],
     },
     {
       name: "Backend",
-      items: ["Node.js", "FastAPI", "Express", "Supabase", "Firebase"],
+      items: ["Node.js", "Bun", "FastAPI", "Express", "Supabase", "Firebase"],
     },
     {
       name: "Infrastructure",
-      items: ["Docker", "AWS", "MongoDB","PostgreSQL"],
+      items: ["Docker", "AWS", "MongoDB", "PostgreSQL", "Redis"],
     },
   ],
 };
 
+/** Blogify is the CMS behind /writing — my own blogging app. Linked from the
+ *  writing section and from the failure states, so a reader can still reach the
+ *  writing when the fetch or the proxy is having a bad day. */
+export const BLOGIFY_SITE = "https://blogging-application-eight.vercel.app";
+
+const MEDIUM_URL = "https://medium.com/@divyamjha.70055594";
+
 export const writings = {
   platform: "Medium",
-  url: "https://medium.com/@divyamjha.70055594",
-  description:
-    "I host my thoughts on Medium rather than building a custom site. Instead of overengineering and reinventing the wheel, I prefer leveraging a mature platform that lets me focus on what matters: sharing insights on AI systems, product strategy, and technical architecture.",
+  url: MEDIUM_URL,
+  // Each paragraph is split around its linked name so the link sits inside the
+  // sentence rather than trailing it.
+  paragraphs: [
+    {
+      lead: "I host my thoughts on ",
+      link: { label: "Medium", url: MEDIUM_URL },
+      suffix:
+        " rather than building a custom site. Instead of overengineering and reinventing the wheel, I prefer leveraging a mature platform that lets me focus on what matters: sharing insights on AI systems, product strategy, and technical architecture.",
+    },
+    {
+      lead: "The longer build logs and case studies live on ",
+      link: { label: "Blogify", url: BLOGIFY_SITE },
+      suffix:
+        ", the blogging platform I built myself. It is also the CMS behind the writing on this site: I author the posts and series there, and this page fetches them from its API at runtime. Writing on my own tool keeps me honest about it — every rough edge in Blogify is one I run into before anyone else does.",
+    },
+  ],
 };
 
 
 export const aboutMe = {
   paragraphs: [
-    "Beyond engineering and building systems, I find balance in the tactile and the thoughtful. Whether it's exploring the nuances of complex architectures or spending time in the real world, my approach to life is driven by curiosity and a desire to understand how things work at their core.",
-    "I believe that the best products are built by people who have a diverse range of interests. It's the unique combination of technical depth and human perspective that allows us to create technology that actually resonates.",
+    "Beyond engineering and building systems, I find balance in the tactile and the thoughtful. Whether it’s exploring the nuances of complex architectures or spending time in the real world, my approach to life is driven by curiosity and a desire to understand how things work at their core.",
+    "I believe that the best products are built by people who have a diverse range of interests. It’s the unique combination of technical depth and human perspective that allows us to create technology that actually resonates.",
+    "Apart from building on the internet, I’m a gym enthusiast and I play badminton in my spare time. Both are the same lesson in different forms: progress comes from showing up consistently rather than from any single heroic session, and that is as true of a codebase as it is of a lift or a rally.",
     "And besides all this, I love to read and understand how tech startups operate and grow."
   ],
 };
@@ -125,14 +147,14 @@ export const projects = [
     title: "AskMyNotes",
     description: "An intuitive web application for organizing, storing, and asking questions against your personal notes using AI.",
     url: "https://ask-my-notes-kryptonian-coders.vercel.app/",
-    tech: ["React", "TypeScript", "Vite" ,"Gemini API"],
+    tech: ["React", "TypeScript", "Vite", "Gemini API"],
     githubRepo: "https://github.com/divyam-jha123/AskMyNotes-Kryptonian-coders-"
   },
   {
     title: "Blogify",
     description: "A full-stack blogging platform with comprehensive user authentication, allowing users to create, read, and manage articles. It is also the CMS behind the writing on this site — the posts and series here are authored in Blogify and fetched from its API at runtime.",
     url: "https://blogging-application-eight.vercel.app/",
-    tech: ["Express","Node.js", "MongoDB" ,"ejs"],
+    tech: ["Express", "Node.js", "MongoDB", "EJS"],
     githubRepo: "https://github.com/divyam-jha123/Blogify"
   },
   {
@@ -204,10 +226,6 @@ export const products: Product[] = [
   },
 ];
 
-/** Blogify is the CMS behind /writing — my own blogging app. Linked from the
- *  failure states so a reader can still reach the writing when the fetch or the
- *  proxy is having a bad day. */
-export const BLOGIFY_SITE = "https://blogging-application-eight.vercel.app";
 export const blogifyPostUrl = (postId: string) => `${BLOGIFY_SITE}/blog/${postId}`;
 
 /** Posts are authored in Blogify and fetched at runtime. `/api/blog` is a
