@@ -28,7 +28,21 @@ export const personalInfo = {
   ],
 };
 
-export const experiences = [
+/** Compact icon links shown beside an experience title. `kind` picks the mark:
+ *  "lfx" renders the Linux Foundation logo, "proposal" a document icon. */
+export type ExperienceLink = {
+  kind: "lfx" | "proposal";
+  label: string;
+  url: string;
+};
+
+export const experiences: {
+  role: string;
+  organization: string;
+  year: string;
+  points: string[];
+  links?: ExperienceLink[];
+}[] = [
   {
     role: "LFX Mentee — Paladin Java SDK",
     organization: "Linux Foundation Decentralized Trust (LFDT)",
@@ -37,6 +51,7 @@ export const experiences = [
       "Building the Java SDK for Paladin, a privacy-preserving blockchain platform, covering all nine JSON-RPC namespaces over HTTP and WebSocket transport.",
       "Designed a multi-module Gradle architecture and authored RFCs defining the SDK's public API surface.",
     ],
+    links: [],
   },
 ];
 
@@ -102,17 +117,17 @@ export const projects = [
   },
   {
     title: "Blogify",
-    description: "A full-stack blogging platform with comprehensive user authentication, allowing users to create, read, and manage articles.",
+    description: "A full-stack blogging platform with comprehensive user authentication, allowing users to create, read, and manage articles. It is also the CMS behind the writing on this site — the posts and series here are authored in Blogify and fetched from its API at runtime.",
     url: "https://blogging-application-eight.vercel.app/",
     tech: ["Express","Node.js", "MongoDB" ,"ejs"],
     githubRepo: "https://github.com/divyam-jha123/Blogify"
   },
   {
-    title: "Brain Expo",
-    description: "An interactive online platform and exhibition space designed to showcase innovative ideas and connect creators.",
-    url: "https://www.brainexpo.me/",
-    tech: ["TypeScript", "React", "Tailwind CSS", "Vite"],
-    githubRepo: "https://github.com/divyam-jha123/Second-Brain"
+    title: "Chatly",
+    description: "A real-time chat application for secure private messaging, with WebSocket-backed conversations, push notifications and an SFU-based conference room for group calls.",
+    url: "https://chatly-eight-sigma.vercel.app",
+    tech: ["React", "TypeScript", "WebSocket", "Firebase", "Tailwind CSS"],
+    githubRepo: "https://github.com/divyam-jha123/chatly"
   }
 ];
 

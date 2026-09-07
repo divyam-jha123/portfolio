@@ -669,7 +669,8 @@ img {
   flex-shrink: 0;
 }
 
-.project-card-icon-link {
+.project-card-icon-link,
+.entry-links a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -679,7 +680,8 @@ img {
   transition: opacity 0.2s, color 0.2s;
 }
 
-.project-card-icon-link:hover {
+.project-card-icon-link:hover,
+.entry-links a:hover {
   opacity: 1;
   color: var(--text-primary);
 }
@@ -874,6 +876,22 @@ img {
   justify-content: space-between;
   align-items: baseline;
   gap: 16px;
+}
+
+/* Title and its icon links wrap together, so the date keeps its own column. */
+.entry-title-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.entry-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
 }
 
 .entry-title {
