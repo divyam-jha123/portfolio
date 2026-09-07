@@ -1,12 +1,11 @@
 import type { ComponentType } from 'react';
 import { motion } from 'framer-motion';
-import { FileText } from 'lucide-react';
-import { SiLinuxfoundation } from 'react-icons/si';
+import { ExternalLink, FileText } from 'lucide-react';
 import { experiences } from '../data';
 import type { ExperienceLink } from '../data';
 
 const linkIcon: Record<ExperienceLink['kind'], ComponentType<{ size?: number }>> = {
-  lfx: SiLinuxfoundation,
+  lfx: ExternalLink,
   proposal: FileText,
 };
 

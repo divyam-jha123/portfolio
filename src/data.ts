@@ -51,7 +51,18 @@ export const experiences: {
       "Building the Java SDK for Paladin, a privacy-preserving blockchain platform, covering all nine JSON-RPC namespaces over HTTP and WebSocket transport.",
       "Designed a multi-module Gradle architecture and authored RFCs defining the SDK's public API surface.",
     ],
-    links: [],
+    links: [
+      {
+        kind: "lfx",
+        label: "LFX mentorship project",
+        url: "https://mentorship.lfx.linuxfoundation.org/project/b0a24d64-fc7d-4a9c-8314-9c282298e904",
+      },
+      {
+        kind: "proposal",
+        label: "My LFX proposal (PDF)",
+        url: "https://jobspring-prod-uploads.s3.amazonaws.com/98493ffe-f1db-4db5-817a-1635bb999436-.pdf",
+      },
+    ],
   },
 ];
 
