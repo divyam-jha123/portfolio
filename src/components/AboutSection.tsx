@@ -4,6 +4,7 @@ import { aboutMe } from '../data';
 export function AboutSection() {
   return (
     <motion.section
+      id="about"
       className="section"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}

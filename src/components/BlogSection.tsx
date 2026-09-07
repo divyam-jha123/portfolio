@@ -4,6 +4,7 @@ import { writings } from '../data';
 export function BlogSection() {
   return (
     <motion.section
+      id="writing"
       className="section"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}

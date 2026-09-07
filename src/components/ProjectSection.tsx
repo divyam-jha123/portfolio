@@ -6,6 +6,7 @@ import { projects } from '../data';
 export function ProjectSection() {
   return (
     <motion.section
+      id="projects"
       className="section"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}

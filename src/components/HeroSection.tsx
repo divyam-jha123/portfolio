@@ -15,6 +15,7 @@ export function HeroSection() {
 
   return (
     <motion.section
+      id="home"
       className="hero"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
