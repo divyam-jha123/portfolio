@@ -109,6 +109,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 export function ProductSection() {
   return (
     <motion.section
+      id="products"
       className="section"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}

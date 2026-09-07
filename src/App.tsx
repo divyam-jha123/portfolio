@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect } from 'react';
 import { MotionConfig } from 'framer-motion';
 import { ThemeToggle } from './components/ThemeToggle';
 import { Dock } from './components/Dock';
+import { SideNav } from './components/SideNav';
 import { HeroSection } from './components/HeroSection';
 import { ProductSection } from './components/ProductSection';
 import { ProjectSection } from './components/ProjectSection';
@@ -89,6 +90,7 @@ function App() {
           <NotFoundPage />
         )}
       </main>
+      {isHome && <SideNav />}
       <Dock />
     </MotionConfig>
   );

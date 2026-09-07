@@ -1,8 +1,8 @@
-import { QrCode } from 'lucide-react';
-import { FaGithub, FaLinkedin, FaXTwitter } from 'react-icons/fa6';
+import { QrCode, Mail, CalendarClock } from 'lucide-react';
+import { FaGithub, FaLinkedin, FaMedium, FaXTwitter } from 'react-icons/fa6';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
-import { socials } from '../data';
+import { socials, writings } from '../data';
 
 
 import QRCode from 'qrcode';
@@ -129,6 +129,43 @@ export function Dock() {
           aria-label="X (Twitter) profile (opens in a new tab)"
         >
           <FaXTwitter size={18} />
+        </motion.a>
+
+        <motion.a
+          className="dock-item"
+          href={socials.cal}
+          target="_blank"
+          rel="noopener noreferrer"
+          whileHover={{ scale: 1.15 }}
+          whileTap={{ scale: 0.95 }}
+          title="Schedule a meeting"
+          aria-label="Schedule a meeting on Cal.com (opens in a new tab)"
+        >
+          <CalendarClock size={18} />
+        </motion.a>
+
+        <motion.a
+          className="dock-item"
+          href={`mailto:${socials.email}`}
+          whileHover={{ scale: 1.15 }}
+          whileTap={{ scale: 0.95 }}
+          title="Email"
+          aria-label={`Email ${socials.email}`}
+        >
+          <Mail size={18} />
+        </motion.a>
+
+        <motion.a
+          className="dock-item"
+          href={writings.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          whileHover={{ scale: 1.15 }}
+          whileTap={{ scale: 0.95 }}
+          title="Medium"
+          aria-label="Medium profile (opens in a new tab)"
+        >
+          <FaMedium size={18} />
         </motion.a>
 
       </motion.div>

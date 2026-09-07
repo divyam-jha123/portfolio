@@ -4,6 +4,7 @@ import { socials } from '../data';
 export function ContactSection() {
   return (
     <motion.section
+      id="contact"
       className="section"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}

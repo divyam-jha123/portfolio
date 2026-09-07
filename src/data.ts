@@ -123,6 +123,7 @@ export const socials = {
   linkedin: "https://www.linkedin.com/in/divyam-kumar-jha",
   x: "https://x.com/_nikhil_jha",
   email: "divyamjha.70055594@gmail.com",
+  cal: "https://cal.com/divyamjha27/15min",
 
 };
 
