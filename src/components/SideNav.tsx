@@ -10,6 +10,7 @@ const sections = [
   { id: 'tech', label: 'Tech Stack' },
   { id: 'writing', label: 'Writings' },
   { id: 'about', label: 'About' },
+  { id: 'beyond', label: 'Beyond Code' },
   { id: 'contact', label: 'Contact' },
 ];
 

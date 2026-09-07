@@ -8,9 +8,15 @@
   --text-tertiary: #9ca3af;
   --border-color: #e5e7eb;
   --accent: #3b82f6;
-  --dock-bg: rgba(255, 255, 255, 0.85);
-  --dock-border: rgba(0, 0, 0, 0.08);
-  --dock-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+  /* The dock floats over --bg-primary (a grey), so it reads as elevated only
+     if it is brighter than the page and carries a real shadow. */
+  --dock-bg: rgba(255, 255, 255, 0.92);
+  --dock-border: rgba(0, 0, 0, 0.14);
+  --dock-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.16),
+    0 2px 6px rgba(0, 0, 0, 0.08);
+  --dock-item-hover: rgba(10, 10, 10, 0.07);
+  --dock-item-active: rgba(59, 130, 246, 0.12);
   --card-bg: rgba(255, 255, 255, 0.5);
   --link-underline: #0a0a0a;
   --section-label: #0a0a0a;
@@ -38,9 +44,15 @@
   --text-tertiary: #71717a;
   --border-color: #27272a;
   --accent: #60a5fa;
-  --dock-bg: rgba(24, 24, 27, 0.9);
-  --dock-border: rgba(255, 255, 255, 0.08);
-  --dock-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  /* Two steps lighter than --bg-primary: in dark mode elevation reads as
+     lift, not as shadow. */
+  --dock-bg: rgba(39, 39, 42, 0.92);
+  --dock-border: rgba(255, 255, 255, 0.16);
+  --dock-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.6),
+    0 2px 6px rgba(0, 0, 0, 0.4);
+  --dock-item-hover: rgba(255, 255, 255, 0.1);
+  --dock-item-active: rgba(96, 165, 250, 0.18);
   --card-bg: rgba(24, 24, 27, 0.5);
   --link-underline: #fafafa;
   --section-label: #fafafa;
@@ -218,8 +230,8 @@ img {
   gap: 4px;
   padding: 10px 16px;
   background: var(--dock-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid var(--dock-border);
   border-radius: 20px;
   box-shadow: var(--dock-shadow);
@@ -228,7 +240,7 @@ img {
 .dock-divider {
   width: 1px;
   height: 24px;
-  background-color: var(--border-color);
+  background-color: var(--dock-border);
   margin: 0 8px;
 }
 
@@ -249,13 +261,13 @@ img {
 
 .dock-item:hover {
   color: var(--text-primary);
-  background-color: var(--bg-secondary);
+  background-color: var(--dock-item-hover);
   transform: scale(1.1);
 }
 
 .dock-item.active {
-  background-color: var(--bg-secondary);
-  color: var(--text-primary);
+  background-color: var(--dock-item-active);
+  color: var(--accent);
 }
 
 /* Hero section */
@@ -620,6 +632,65 @@ img {
   margin-bottom: 16px;
 }
 
+/* Beyond the Code */
+.beyond-intro {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.beyond-grid {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 16px;
+}
+
+.beyond-card {
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 20px;
+  background-color: var(--bg-secondary);
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.beyond-card:hover {
+  border-color: var(--text-tertiary);
+  transform: translateY(-2px);
+}
+
+.beyond-icon {
+  display: flex;
+  align-items: center;
+  color: var(--text-tertiary);
+  margin-bottom: 12px;
+  transition: color 0.25s ease;
+}
+
+.beyond-card:hover .beyond-icon {
+  color: var(--accent, var(--text-primary));
+}
+
+/* Card heading tier from the type scale: 18px / 600 / 1.35. */
+.beyond-title {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+/* Card body tier: 15px / 400 / 1.55. */
+.beyond-text {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
 /* Contact */
 .contact-content {
   font-size: 16px;
@@ -819,6 +890,14 @@ img {
 
 /* Responsive */
 @media (max-width: 640px) {
+  .beyond-title {
+    font-size: 17px;
+  }
+
+  .beyond-text {
+    font-size: 14px;
+  }
+
   .portfolio-container {
     padding: 60px 16px 140px;
   }

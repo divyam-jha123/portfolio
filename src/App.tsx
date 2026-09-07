@@ -12,6 +12,7 @@ import { TechStackSection } from './components/TechStackSection';
 
 import { BlogSection } from './components/BlogSection';
 import { AboutSection } from './components/AboutSection';
+import { BeyondCodeSection } from './components/BeyondCodeSection';
 import { ContactSection } from './components/ContactSection';
 import { WritingPage, NotFoundPage } from './components/WritingPage';
 import { SeriesPage } from './components/SeriesPage';
@@ -31,6 +32,7 @@ function Portfolio() {
       <TechStackSection />
       <BlogSection />
       <AboutSection />
+      <BeyondCodeSection />
       <ContactSection />
     </>
   );

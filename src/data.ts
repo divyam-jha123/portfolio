@@ -3,7 +3,7 @@ export const personalInfo = {
   pronunciation: "/dɪv.jəm dʒɑː/",
   partOfSpeech: "noun",
   // Where the hero globe drops its marker.
-  location: { city: "Pune, Maharashtra", lat: 18.5204, lng: 73.8567 },
+  location: { city: "Pune, Maharashtra", country: "India", lat: 18.5204, lng: 73.8567 },
   bio: [
     {
       text: "A full-stack developer and ",
@@ -111,16 +111,16 @@ export const writings = {
   // sentence rather than trailing it.
   paragraphs: [
     {
-      lead: "I host my thoughts on ",
+      lead: "I write the technical stuff on ",
       link: { label: "Medium", url: MEDIUM_URL },
       suffix:
-        " rather than building a custom site. Instead of overengineering and reinventing the wheel, I prefer leveraging a mature platform that lets me focus on what matters: sharing insights on AI systems, product strategy, and technical architecture.",
+        " — AI systems, product strategy, architecture. The things I want other engineers to read.",
     },
     {
-      lead: "The longer build logs and case studies live on ",
+      lead: "I document the journey on ",
       link: { label: "Blogify", url: BLOGIFY_SITE },
       suffix:
-        ", the blogging platform I built myself. It is also the CMS behind the writing on this site: I author the posts and series there, and this page fetches them from its API at runtime. Writing on my own tool keeps me honest about it — every rough edge in Blogify is one I run into before anyone else does.",
+        " — build logs, case studies, and what actually broke along the way. Blogify is the blogging platform I built, and the CMS behind this page: these posts are fetched from its API at runtime, so I hit every rough edge before anyone else does.",
     },
   ],
 };
@@ -128,10 +128,32 @@ export const writings = {
 
 export const aboutMe = {
   paragraphs: [
-    "Beyond engineering and building systems, I find balance in the tactile and the thoughtful. Whether it’s exploring the nuances of complex architectures or spending time in the real world, my approach to life is driven by curiosity and a desire to understand how things work at their core.",
-    "I believe that the best products are built by people who have a diverse range of interests. It’s the unique combination of technical depth and human perspective that allows us to create technology that actually resonates.",
-    "Apart from building on the internet, I’m a gym enthusiast and I play badminton in my spare time. Both are the same lesson in different forms: progress comes from showing up consistently rather than from any single heroic session, and that is as true of a codebase as it is of a lift or a rally.",
-    "And besides all this, I love to read and understand how tech startups operate and grow."
+    "My approach to building is driven by curiosity — a need to understand how things work at their core rather than just how to use them. That is as true of a distributed system as it is of anything else I pick up.",
+    "I believe the best products are built by people with a range of interests. Technical depth gets a thing working; human perspective is what makes it resonate. The list below is where the second half comes from."
+  ],
+};
+
+/** What I do away from a keyboard. Rendered as a card grid in the Beyond the
+ *  Code section, so each entry stays one tight line of copy. */
+export const beyondCode = {
+  intro:
+    "Engineering is what I do most, not all of what I do. A few things that keep the rest of me sharp:",
+  interests: [
+    {
+      icon: "gym",
+      title: "The gym",
+      text: "Five days a week. Nothing has taught me more about compounding: no single session moves the number, and every skipped week does.",
+    },
+    {
+      icon: "badminton",
+      title: "Badminton",
+      text: "Where I go to think about nothing. Fast enough that the moment you start planning the rally, you have already lost it.",
+    },
+    {
+      icon: "startups",
+      title: "How startups work",
+      text: "I read teardowns, funding stories, and post-mortems constantly — how companies find a market, price a thing, and occasionally fall apart.",
+    },
   ],
 };
 

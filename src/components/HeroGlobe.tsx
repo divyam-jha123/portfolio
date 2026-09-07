@@ -262,7 +262,7 @@ function GlobePopout({ origin, reduceMotion, onClose }: PopoutProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const [size] = useState(() => Math.min(360, window.innerWidth - 64));
-  const { city, lat, lng } = personalInfo.location;
+  const { city, country, lat, lng } = personalInfo.location;
 
   useGlobeRenderer(canvasRef, { size, intro: false, drift: false, zoom: POPOUT_ZOOM, reduceMotion });
 
@@ -332,7 +332,7 @@ function GlobePopout({ origin, reduceMotion, onClose }: PopoutProps) {
           className="globe-dialog-canvas"
           style={{ width: size, height: size }}
         />
-        <h2 id="globe-dialog-title" className="globe-dialog-title">{city}</h2>
+        <h2 id="globe-dialog-title" className="globe-dialog-title">{city}, {country}</h2>
         <p className="globe-dialog-coords">
           {formatCoord(lat, 'N', 'S')} · {formatCoord(lng, 'E', 'W')} · IST
         </p>
