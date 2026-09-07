@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, ArrowUpRight, RotateCw } from 'lucide-react';
 import { Link } from '../router';
+import { BlogifyLoader } from './BlogifyLoader';
 import { SERIES_API_BASE, BLOGIFY_SITE, blogifySeriesUrl, blogifyPostUrl } from '../data';
 import type { Series, SeriesPart } from '../data';
 import { renderRichText, estimateReadingTime, excerpt } from '../lib/richText';
@@ -346,36 +347,13 @@ function BlogifyLink() {
   );
 }
 
-/** Shaped like the page it replaces: header, then index beside article. */
 function SeriesSkeleton() {
   return (
-    <div className="series" aria-busy="true" aria-live="polite">
-      <span className="sr-only">Loading the series…</span>
+    <div className="series">
       <div className="series-header">
         <BackLink />
-        <div className="skeleton skeleton-meta" style={{ marginTop: 0, marginBottom: 16 }} />
-        <div className="skeleton skeleton-title skeleton-title--short" />
-        <div className="skeleton skeleton-meta" />
       </div>
-      <div className="series-layout" aria-hidden="true">
-        <div className="series-index">
-          <ol className="series-list">
-            <li><div className="skeleton series-card-skeleton" /></li>
-            <li><div className="skeleton series-card-skeleton" /></li>
-          </ol>
-        </div>
-        <div className="article series-article">
-          <div className="article-header">
-            <div className="skeleton skeleton-title" />
-            <div className="skeleton skeleton-meta" />
-          </div>
-          <div className="article-body">
-            {[92, 100, 74, 100, 88, 96, 60].map((width, i) => (
-              <div className="skeleton skeleton-line" key={i} style={{ width: `${width}%` }} />
-            ))}
-          </div>
-        </div>
-      </div>
+      <BlogifyLoader label="Loading the series." />
     </div>
   );
 }

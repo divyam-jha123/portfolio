@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowUpRight, RotateCw } from 'lucide-react';
 import { Link } from '../router';
+import { BlogifyLoader } from './BlogifyLoader';
 import { BLOG_API_BASE, BLOGIFY_SITE, blogifyPostUrl } from '../data';
 import type { BlogPost } from '../data';
 import { renderRichText, estimateReadingTime } from '../lib/richText';
@@ -166,22 +167,13 @@ function BackLink() {
   );
 }
 
-/** Shaped like the article it replaces, so the layout doesn't jump on arrival. */
 function ArticleSkeleton() {
   return (
-    <div className="article" aria-busy="true" aria-live="polite">
-      <span className="sr-only">Loading the post…</span>
+    <div className="article">
       <div className="article-header">
         <BackLink />
-        <div className="skeleton skeleton-title" />
-        <div className="skeleton skeleton-title skeleton-title--short" />
-        <div className="skeleton skeleton-meta" />
       </div>
-      <div className="article-body" aria-hidden="true">
-        {[92, 100, 74, 100, 88, 96, 60].map((width, index) => (
-          <div className="skeleton skeleton-line" key={index} style={{ width: `${width}%` }} />
-        ))}
-      </div>
+      <BlogifyLoader label="Loading the post." />
     </div>
   );
 }

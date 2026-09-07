@@ -921,26 +921,20 @@ img {
 }
 
 /* Products: the two things with his own name on them. Heavier than the project
-   cards on purpose — full-column blocks, 28px titles, a real button row. */
+   cards on purpose — 28px titles and a real button row, but no box around them. */
 .product-list {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
+/* A soft tinted slab, no hairline and no hover state: enough to tell the two
+   products apart and inset them from the column, without a boxed-in feel. The
+   first paragraph is always visible; the rest folds behind a chevron. */
 .product {
-  padding: 28px;
-  border: 1px solid var(--border-color);
+  padding: 26px 28px;
   border-radius: 16px;
-  background: var(--card-bg);
-  transition:
-    border-color 0.25s ease,
-    box-shadow 0.25s ease;
-}
-
-.product:hover {
-  border-color: var(--text-tertiary);
-  box-shadow: 0 12px 32px -20px rgba(0, 0, 0, 0.45);
+  background: var(--bg-secondary);
 }
 
 .product-head {
@@ -1039,8 +1033,58 @@ img {
   color: var(--text-secondary);
 }
 
+/* Collapsible remainder. grid-template-rows tweens 0fr -> 1fr, which is the
+   one way to animate "auto" height in CSS without measuring. */
+.product-more {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.product-more[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+
+.product-more-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.product-more-inner > .product-description:first-child {
+  margin-top: 14px;
+}
+
+.product-toggle {
+  margin-top: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 0;
+  border: 0;
+  background: none;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.product-toggle:hover {
+  color: var(--text-primary);
+}
+
+.product-toggle-icon {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.product-toggle[aria-expanded="true"] .product-toggle-icon {
+  transform: rotate(180deg);
+}
+
 .product-actions {
-  margin-top: 24px;
+  margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -1138,6 +1182,11 @@ img {
 @media (prefers-reduced-motion: reduce) {
   .product-status--live .product-status-dot {
     animation: none;
+  }
+
+  .product-more,
+  .product-toggle-icon {
+    transition: none;
   }
 }
 
@@ -1371,52 +1420,35 @@ img {
   border: 1px solid var(--border-color);
 }
 
-/* Loading state: the article's own shape, so nothing jumps when content lands. */
-.skeleton {
-  border-radius: 6px;
-  background: var(--bg-secondary);
-  position: relative;
-  overflow: hidden;
+/* Blogify fetch state: the logo turns while the API wakes up, with a line
+   saying where the wait comes from. */
+.blogify-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 64px 0 80px;
+  text-align: center;
 }
 
-.skeleton::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  transform: translateX(-100%);
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--card-bg),
-    transparent
-  );
-  animation: skeleton-sweep 1.4s ease-in-out infinite;
+.blogify-loader-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  animation: blogify-spin 1.6s linear infinite;
 }
 
-@keyframes skeleton-sweep {
-  100% {
-    transform: translateX(100%);
+.blogify-loader-text {
+  max-width: 34ch;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+@keyframes blogify-spin {
+  to {
+    transform: rotate(360deg);
   }
-}
-
-.skeleton-title {
-  height: 44px;
-  margin-bottom: 12px;
-}
-
-.skeleton-title--short {
-  width: 55%;
-}
-
-.skeleton-meta {
-  height: 18px;
-  width: 240px;
-  margin-top: 20px;
-}
-
-.skeleton-line {
-  height: 16px;
-  margin-bottom: 14px;
 }
 
 .sr-only {
@@ -1431,7 +1463,7 @@ img {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .skeleton::after {
+  .blogify-loader-logo {
     animation: none;
   }
 }
@@ -1454,10 +1486,6 @@ img {
     margin: 28px 0;
     padding-left: 18px;
     font-size: 20px;
-  }
-
-  .skeleton-title {
-    height: 34px;
   }
 }
 
@@ -1635,12 +1663,6 @@ img {
   font-size: 12px;
   line-height: 1.5;
   color: var(--text-secondary);
-}
-
-.series-card-skeleton {
-  width: 100%;
-  height: 132px;
-  border-radius: 12px;
 }
 
 /* Reading pane ----------------------------------------------------------- */
@@ -1843,12 +1865,6 @@ img {
     font-weight: 600;
   }
 
-  .series-card-skeleton {
-    width: 100%;
-    height: 72px;
-    margin-bottom: 0;
-    border-radius: 10px;
-  }
 }
 
 @media (max-width: 640px) {
