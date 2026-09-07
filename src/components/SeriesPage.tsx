@@ -88,7 +88,7 @@ export function SeriesPage({ slug, seriesSlug, eyebrow, partNumber }: Props) {
   if (state.status === 'missing') {
     return (
       <SeriesMessage
-        title="That series isn't published"
+        title="That series isn’t published"
         body={
           <>
             It may have been unpublished or removed since this link was created.
@@ -102,7 +102,7 @@ export function SeriesPage({ slug, seriesSlug, eyebrow, partNumber }: Props) {
   if (state.status === 'error') {
     return (
       <SeriesMessage
-        title="This series didn't load"
+        title="This series didn’t load"
         body={
           <>
             {state.message} The writing lives on <BlogifyLink />, so this is usually

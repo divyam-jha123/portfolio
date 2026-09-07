@@ -485,8 +485,9 @@ img {
   width: max-content;
   animation: marquee-scroll 35s linear infinite;
 }
-.marquee-wrapper:hover .marquee-track,
-.marquee-wrapper:focus-within .marquee-track,
+/* No focus-within pause here: the only focusable child is the Pause/Play
+   button, so it would keep the track frozen after Play is clicked. The track
+   itself is aria-hidden and holds nothing tabbable. */
 .marquee-track.paused {
   animation-play-state: paused;
 }
@@ -524,8 +525,8 @@ img {
 }
 
 .marquee-item:hover .marquee-icon {
-  color: var(--text-primary);
-  filter: drop-shadow(0 0 8px var(--accent));
+  color: var(--brand, var(--text-primary));
+  filter: drop-shadow(0 0 8px var(--brand, var(--accent)));
 }
 
 .marquee-label {
@@ -586,6 +587,11 @@ img {
   color: var(--text-tertiary);
   display: flex;
   align-items: center;
+  transition: color 0.25s ease;
+}
+
+.tech-category li:hover .tech-list-icon {
+  color: var(--brand, var(--text-primary));
 }
 
 /* Recommendations */
@@ -595,6 +601,12 @@ img {
   font-size: 16px;
   color: var(--text-secondary);
   line-height: 1.6;
+}
+
+/* Matches the About section's paragraph rhythm; the last one keeps the
+   section's own bottom spacing. */
+.blog-description + .blog-description {
+  margin-top: 16px;
 }
 
 /* About section */

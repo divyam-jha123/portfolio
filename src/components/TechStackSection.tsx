@@ -6,7 +6,7 @@ import {
   SiTypescript, SiJavascript, SiPython, SiReact, SiNextdotjs,
   SiBootstrap, SiTailwindcss, SiNodedotjs, SiFastapi, SiExpress,
   SiSupabase, SiFirebase, SiDocker, SiMongodb,
-  SiPostgresql, SiRedis
+  SiPostgresql, SiRedis, SiBun, SiShadcnui, SiEjs
 } from 'react-icons/si';
 import { FaJava, FaAws } from 'react-icons/fa';
 
@@ -29,11 +29,43 @@ const iconMap: Record<string, React.ReactNode> = {
   'mongodb':        <SiMongodb />,
   'postgresql':     <SiPostgresql />,
   'redis':          <SiRedis />,
+  'bun':            <SiBun />,
+  'shadcn/ui':      <SiShadcnui />,
+  'ejs':            <SiEjs />,
+};
+
+// Official brand colors, applied only on hover so the resting marquee stays
+// monochrome. Marks whose real logo is black/white (Express, Next.js,
+// shadcn/ui, Bun's cream) are left out and inherit --text-primary, which is
+// the readable equivalent in both themes.
+const brandMap: Record<string, string> = {
+  'typescript':     '#3178C6',
+  'javascript':     '#F7DF1E',
+  'python':         '#3776AB',
+  'java':           '#ED8B00',
+  'react':          '#61DAFB',
+  'bootstrap':      '#7952B3',
+  'tailwind css':   '#06B6D4',
+  'node.js':        '#5FA04E',
+  'fastapi':        '#009688',
+  'supabase':       '#3FCF8E',
+  'firebase':       '#FFCA28',
+  'docker':         '#2496ED',
+  'aws':            '#FF9900',
+  'mongodb':        '#47A248',
+  'postgresql':     '#4169E1',
+  'redis':          '#FF4438',
+  'ejs':            '#B4CA65',
 };
 
 // Data labels are display-cased; look up case-insensitively so a casing drift
 // in data.ts never silently renders an empty icon slot.
 const iconFor = (item: string) => iconMap[item.toLowerCase()] ?? null;
+
+// Falls through to the CSS fallback (--text-primary) when a mark has no usable
+// brand color.
+const brandFor = (item: string) =>
+  ({ '--brand': brandMap[item.toLowerCase()] } as React.CSSProperties);
 
 // Flatten all tech items for the marquee
 const allItems = techStack.categories.flatMap(c => c.items);
@@ -66,7 +98,11 @@ export function TechStackSection() {
             aria-hidden="true"
           >
             {[...allItems, ...allItems].map((item, i) => (
-              <div className="marquee-item" key={`${item}-${i}`}>
+              <div
+                className="marquee-item"
+                key={`${item}-${i}`}
+                style={brandFor(item)}
+              >
                 <span className="marquee-icon">{iconFor(item)}</span>
                 <span className="marquee-label">{item}</span>
               </div>
@@ -90,7 +126,7 @@ export function TechStackSection() {
             <h3>{category.name}</h3>
             <ul>
               {category.items.map((item) => (
-                <li key={item}>
+                <li key={item} style={brandFor(item)}>
                   <span className="tech-list-icon">{iconFor(item)}</span>
                   {item}
                 </li>
