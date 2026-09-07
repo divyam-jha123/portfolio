@@ -69,6 +69,12 @@ Do not regress these — they were added deliberately:
 - Body text targets WCAG AA (4.5:1). `--text-tertiary` currently fails at 2.33:1
   in light mode and is a known open issue.
 
+
+### staging and pushing instructions
+- dont use the signoff by claude code
+- use `ga <file-name>` for staging
+- use `git commit -m <commit message>` for commiting changes
+
 ### Assets
 
 Hero portraits are theme-swapped CSS backgrounds using `image-set()` with WebP
