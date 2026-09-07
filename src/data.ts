@@ -104,6 +104,9 @@ export const BLOGIFY_SITE = "https://blogging-application-eight.vercel.app";
 
 const MEDIUM_URL = "https://medium.com/@divyamjha.70055594";
 
+const EXCALIDRAW_URL =
+  "https://excalidraw.com/#json=aKrDEkF8JRIYi6U50fdWL,RT9UdMcQBG2Q-dt3izsBXA";
+
 export const writings = {
   platform: "Medium",
   url: MEDIUM_URL,
@@ -155,6 +158,21 @@ export const beyondCode = {
       text: "I read teardowns, funding stories, and post-mortems constantly — how companies find a market, price a thing, and occasionally fall apart.",
     },
   ],
+};
+
+/** The Now section: a live pointer at current work rather than a shipped-things
+ *  list. `boardUrl` is the public Excalidraw board — a read-only share link,
+ *  since anyone with an edit link can change the board. */
+export const now = {
+  intro:
+    "A live look at what I’m building, learning, and thinking about right now.",
+  board: {
+    label: "Excalidraw board",
+    description:
+      "My Excalidraw board is where I sketch product ideas, architecture, feature flows, and the things I’m currently exploring.",
+    action: "View my live workspace",
+    url: EXCALIDRAW_URL,
+  },
 };
 
 export const projects = [

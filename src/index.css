@@ -632,6 +632,50 @@ img {
   margin-bottom: 16px;
 }
 
+/* Now */
+.now-intro {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.now-card {
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 24px;
+  background-color: var(--card-bg);
+}
+
+/* Borrows the Products "live" green so a pulsing dot means the same thing
+   everywhere on the page. */
+.now-card-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--status-live);
+  margin-bottom: 12px;
+}
+
+.now-card-label .product-status-dot {
+  animation: product-pulse 2.4s ease-out infinite;
+}
+
+.now-card-text {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.now-card-action {
+  margin-top: 20px;
+  text-decoration: none;
+}
+
 /* Beyond the Code */
 .beyond-intro {
   font-size: 16px;
@@ -890,6 +934,14 @@ img {
 
 /* Responsive */
 @media (max-width: 640px) {
+  .now-card {
+    padding: 20px;
+  }
+
+  .now-card-text {
+    font-size: 15px;
+  }
+
   .beyond-title {
     font-size: 17px;
   }

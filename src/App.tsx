@@ -4,6 +4,7 @@ import { ThemeToggle } from './components/ThemeToggle';
 import { Dock } from './components/Dock';
 import { SideNav } from './components/SideNav';
 import { HeroSection } from './components/HeroSection';
+import { NowSection } from './components/NowSection';
 import { ProductSection } from './components/ProductSection';
 import { ProjectSection } from './components/ProjectSection';
 import { ExperienceSection } from './components/ExperienceSection';
@@ -30,6 +31,7 @@ function Portfolio() {
       <ExperienceSection />
       <EducationSection />
       <TechStackSection />
+      <NowSection />
       <BlogSection />
       <AboutSection />
       <BeyondCodeSection />
