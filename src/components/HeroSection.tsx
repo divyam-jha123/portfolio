@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { personalInfo } from '../data';
+import { HeroGlobe } from './HeroGlobe';
 
 export function HeroSection() {
   const [time, setTime] = useState(getISTTime());
@@ -28,7 +29,10 @@ export function HeroSection() {
         <span className="dot">•</span>
         <span>{personalInfo.partOfSpeech}</span>
         <span className="dot">•</span>
-        <span>{time} IST</span>
+        <span className="hero-time">
+          <span>{time} IST</span>
+          <HeroGlobe />
+        </span>
       </div>
 
       <div className="hero-bio">

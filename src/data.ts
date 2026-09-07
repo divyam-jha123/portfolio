@@ -2,6 +2,8 @@ export const personalInfo = {
   name: "Divyam Jha",
   pronunciation: "/dɪv.jəm dʒɑː/",
   partOfSpeech: "noun",
+  // Where the hero globe drops its marker.
+  location: { city: "Pune, Maharashtra", lat: 18.5204, lng: 73.8567 },
   bio: [
     {
       text: "A full-stack developer and ",
