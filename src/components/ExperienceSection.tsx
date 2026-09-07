@@ -1,5 +1,13 @@
+import type { ComponentType } from 'react';
 import { motion } from 'framer-motion';
+import { ExternalLink, FileText } from 'lucide-react';
 import { experiences } from '../data';
+import type { ExperienceLink } from '../data';
+
+const linkIcon: Record<ExperienceLink['kind'], ComponentType<{ size?: number }>> = {
+  lfx: ExternalLink,
+  proposal: FileText,
+};
 
 export function ExperienceSection() {
   return (
@@ -15,7 +23,29 @@ export function ExperienceSection() {
       {experiences.map((exp) => (
         <div className="experience-entry" key={exp.role}>
           <div className="entry-header">
-            <h3 className="entry-title">{exp.role}</h3>
+            <div className="entry-title-group">
+              <h3 className="entry-title">{exp.role}</h3>
+              {exp.links && exp.links.length > 0 && (
+                <div className="entry-links">
+                  {exp.links.map((link) => {
+                    const Icon = linkIcon[link.kind];
+                    return (
+                      <a
+                        key={link.url}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="project-card-icon-link"
+                        title={link.label}
+                        aria-label={`${exp.role} — ${link.label}`}
+                      >
+                        <Icon size={16} />
+                      </a>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
             <span className="entry-date">{exp.year}</span>
           </div>
           <p className="entry-org">{exp.organization}</p>
